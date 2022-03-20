@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AppContainer from './containers/app';
 import reportWebVitals from './reportWebVitals';
+import { I18nextProvider } from 'react-i18next';
+import { Provider } from 'react-redux';
+import i18n from './common/i18n';
+import store from "./stores"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <AppContainer />
+      </I18nextProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
