@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'antd/dist/antd.css';
 import AppContainer from './containers/app';
 import reportWebVitals from './reportWebVitals';
 import { I18nextProvider } from 'react-i18next';
@@ -9,13 +10,13 @@ import i18n from './common/i18n';
 import store from "./stores"
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Suspense fallback={() => null}>
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
         <AppContainer />
       </I18nextProvider>
     </Provider>
-  </React.StrictMode>,
+  </Suspense>,
   document.getElementById('root')
 );
 

@@ -1,0 +1,37 @@
+{
+  "common": {
+    "pageTitle": "Website thương mại điện tử!",
+    "searchPlaceholder": "Nhập tên sản phẩm, mã sản phẩm, từ khóa cần tìm",
+    "companyName": "Công Ty Cổ Phần Dịch Vụ Thương Mại Tripple D",
+    "companyId": "MSDN: 123456789 do Sở Kế hoạch và Đầu tư TP. Hà Nội cấp lần đầu ngày 28/03/2022",
+    "aboutUs": "Về chúng tôi",
+    "introduce": "Giới thiệu về Tripple D",
+    "storeList": "Danh sách cửa hàng",
+    "qualityManagement": "Quản lý chất lượng",
+    "rules": "Điều khoản và điều kiện áp dụng",
+    "securityPolicy": "Chính sách bảo mật và chia sé thông tin"
+  },
+  "user": {
+    "loginTitle": "Đăng nhập hệ thống",
+    "register": "Đăng ký",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "account": "Tài khoản",
+    "password": "Mật khẩu",
+    "dontHaveAccount": "Chưa có tài khoản? Tạo mới tại đây",
+    "haveAccount": "Đã có tài khoản? Đăng nhập",
+    "createAccount": "Tạo mới tài khoản",
+    "surname": "Họ",
+    "name": "Tên",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "registerSuccessfully": "Đăng ký thành công",
+    "backToHome": "Về trang chủ"
+  },
+  "cart": {
+    "title": "Giỏ hàng"
+  },
+  "form": {
+    "required": "Mục này bắt buộc nhập"
+  }
+}
