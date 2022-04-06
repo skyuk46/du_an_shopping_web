@@ -1,0 +1,79 @@
+@mixin  vertical-center($direction) {
+  display: flex;
+  justify-content: center;
+  text-align: $direction;
+  flex-direction: column;                    
+}
+
+#cart {
+  width: 100%;
+  #order-complete {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 30px;
+  }
+  #no-item-cart {
+      margin-top: 60px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      justify-content: center;
+      align-self: center;
+      height: 20vw;
+  }
+  
+  #cart-container {
+      background-color: rgba($color: black, $alpha: 0.05);
+      margin-top: 60px;
+      #product-list{
+          list-style-type: none;
+          padding: 0;
+          li {
+              width: 100%;
+              padding: 1vw;
+              display: flex;
+              border-bottom: rgba($color: black, $alpha: 0.2) solid 1px;
+              background-color: white;
+              #name {
+                  width: 25%;
+                  font-weight: bold;
+                  @include vertical-center(center);
+              }
+              #price {
+                  width: 30%;
+                  font-size: 20px;
+                  font-weight: 500;
+                  @include vertical-center(right);
+              }
+              #amount {
+                  width: 25%;
+                  @include vertical-center(right);
+                  #amount-number {
+                      display: inline-block;
+                      padding: 15px;
+                  }
+                  .MuiButton-root {
+                      min-width: 40px;
+                      font-size: 20px;
+                      padding: 0;
+                  }
+              }
+          }
+      }
+      #delete-all-cart-button {
+          float: right ;
+      }
+      #order-container {
+          width: 80%;
+          margin: 0 2vw;
+          padding: 1vw;
+          background-color: white;
+          div, i{
+              margin: 0.5vw 0;
+          }
+          span, i {
+              float: right;
+          }
+      }
+  }    
+}

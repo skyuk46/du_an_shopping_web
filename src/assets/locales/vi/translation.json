@@ -9,7 +9,19 @@
     "storeList": "Danh sách cửa hàng",
     "qualityManagement": "Quản lý chất lượng",
     "rules": "Điều khoản và điều kiện áp dụng",
-    "securityPolicy": "Chính sách bảo mật và chia sé thông tin"
+    "securityPolicy": "Chính sách bảo mật và chia sé thông tin",
+    "customerSupport": "Hỗ trợ khách hàng",
+    "paymentPolicy": "Chính sách thanh toán",
+    "deliveryPolicy": "Chính sách giao hàng",
+    "refundPolicy": "Chính sách đổi trả",
+    "customerCare": "Chăm sóc khách hàng",
+    "onlineNumber": "Mua Online : 0347 088691",
+    "contactEmail": "Email: nguyenquocdung604@gmail.com",
+    "mainOffice": "Trụ sở chính:",
+    "address": "Đại học Quốc gia Hà Nội, số 14 Xuân Thủy, Cầu Giấy",
+    "hcmOffice": "Địa chỉ giao dịch TP.HCM:",
+    "none": "Chưa có",
+    "hnOffice": "Địa chỉ giao dịch Hà Nội:"
   },
   "user": {
     "loginTitle": "Đăng nhập hệ thống",
@@ -33,5 +45,9 @@
   },
   "form": {
     "required": "Mục này bắt buộc nhập"
+  },
+  "bill": {
+    "requestLogin": "Yêu cầu đăng nhập",
+    "nextTime": "Để sau"
   }
 }

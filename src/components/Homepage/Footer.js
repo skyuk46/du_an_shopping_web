@@ -31,42 +31,37 @@ function Footer(props) {
             </div>
             <div class="info-column">
               <ul>
-                <li class="name">Hỗ trợ khách hàng</li>
-                <li>Trung tâm hỗ trợ khách hàng</li>
-                <li>Chính sách thanh toán</li>
-                <li>Chính sách giao hàng</li>
-                <li>Chính sách đổi trả</li>
-                <li>Chính sách chiết khấu ưu đãi mua sắm</li>
+                <li class="name">{t('common.customerSupport')}</li>
+                <li>{t('common.paymentPolicy')}</li>
+                <li>{t('common.deliveryPolicy')}</li>
+                <li>{t('common.refundPolicy')}</li>
               </ul>
             </div>
             <div class="info-column">
               <ul>
-                <li class="name">Chăm sóc khách hàng</li>
-                <li>Mua Online : 0247 1066866</li>
-                <li>Email: cskh@winmart.masangroup.com</li>
+                <li class="name">{t('common.customerCare')}</li>
+                <li>{t('common.onlineNumber')}</li>
+                <li>{t('common.contactEmail')}</li>
               </ul>
             </div>
           </div>
           <div id="offices">
             <div class="office">
-              <div class="name">Trụ sở chính:</div>
+              <div class="name">{t('common.mainOffice')}</div>
               <div class="address">
-                Công Ty Cổ Phần Dịch Vụ Thương Mại Tổng Hợp VinCommerce
-                Tầng 5, Mplaza SaiGon, 39 Lê Duẩn, Phường Bến Nghé, Quận 1, Thành Phố Hồ Chí Minh, Việt Nam.
+                {t('common.address')}
               </div>
             </div>
             <div class="office">
-              <div class="name">Địa chỉ giao dịch TP.HCM:</div>
+              <div class="name">{t('common.hcmOffice')}</div>
               <div class="address">
-                Công Ty Cổ Phần Dịch Vụ Thương Mại Tổng Hợp VinCommerce
-                Tầng 5, Mplaza SaiGon, 39 Lê Duẩn, Phường Bến Nghé, Quận 1, Thành Phố Hồ Chí Minh.
+                {t('common.none')}
               </div>
             </div>
             <div class="office">
-              <div class="name">Địa chỉ giao dịch Hà Nội:</div>
+              <div class="name">{t('common.hnOffice')}</div>
               <div class="address">
-                Công Ty Cổ Phần Dịch Vụ Thương Mại Tổng Hợp VinCommerce
-                Tower 1, Times City, 458 Minh Khai, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành phố Hà Nội.
+                {t('common.address')}
               </div>
             </div>
           </div>
