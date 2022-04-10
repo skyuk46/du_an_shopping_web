@@ -1,76 +1,73 @@
-import { productIncrement } from "../../features/productSelectedSlice";
-import { useDispatch } from "react-redux";
-import { addCart } from "../../features/productSelectedInformationSlice";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
+import { useState } from "react";
+import {
+  getCartDetail,
+  createCart,
+  updateCart,
+} from "../../stores/cart/cart.action";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
 
-function AddToCartButton({ product, amount = 1, flexDirection = "row" }) {
-  const dispatch = useDispatch();
+function AddToCartButton(props) {
+  const { product, amount = 1, flexDirection = "row" } = props;
+  const [openLoginModal, setOpenLoginModal] = useState(false);
   const AddToCart = () => {
-    dispatch(productIncrement());
-    try {
-      var cart = JSON.parse(window.localStorage.getItem("cart"));
-      if (cart === null) throw "Cart is empty";
-      cart.push({
-        name: product.name,
-        price: product.price,
-        image: product.images,
-        amount: amount,
-        id: product.id,
+    if (!window.localStorage.getItem("token")) setOpenLoginModal(true);
+    else {
+      props.getCartDetail(window.localStorage.getItem("token"), () => {
+        const { cartDetail } = props;
+        if (cartDetail.length === 0)
+          props.createCart({
+            token: window.localStorage.getItem("token"),
+            product_id: product.id,
+            amount: 1,
+            total_price: product.price
+          })
+        else
+          props.updateCart({
+            token: window.localStorage.getItem("token"),
+            product_id: product.id,
+            amount: 1,
+            total_price: product.price
+          })
+
       });
-      window.localStorage.setItem(
-        "numberOfItem",
-        JSON.stringify(
-          parseInt(JSON.parse(window.localStorage.getItem("numberOfItem"))) + 1
-        )
-      );
-      window.localStorage.setItem("cart", JSON.stringify(cart));
-    } catch (e) {
-      let products = [
-        {
-          name: product.name,
-          price: product.price,
-          image: product.images,
-          amount: amount,
-          id: product.id,
-        },
-      ];
-      window.localStorage.setItem("cart", JSON.stringify(products));
-      window.localStorage.setItem("numberOfItem", JSON.stringify(1));
     }
-    dispatch(
-      addCart({
-        name: product.name,
-        price: product.price,
-        image: product.images,
-        amount: amount,
-        id: product.id,
-      })
-    );
   };
 
   return (
-    <>
+    <div style={{ width: "100%" }}>
+      <Modal
+        visible={openLoginModal}
+        title="Thông báo"
+        onCancel={() => setOpenLoginModal(false)}
+        onOk={() => setOpenLoginModal(false)}
+      >
+        <p>Bạn cần đăng nhập để thêm sản phẩm vào giỏ</p>
+      </Modal>
       {flexDirection == "column" ? (
-        <Button
-          style={{ maxHeight: "70px" }}
-          onClick={AddToCart}
-          variant="contained"
-          color="secondary"
-        >
+        <Button onClick={AddToCart} block>
           Thêm vào giỏ
         </Button>
       ) : (
-        <Button
-          onClick={AddToCart}
-          fullWidth
-          variant="contained"
-          color="secondary"
-        >
+        <Button onClick={AddToCart} block>
           Thêm vào giỏ
         </Button>
       )}
-    </>
+    </div>
   );
 }
 
-export default AddToCartButton;
+const mapStateToProps = (state) => ({
+  cartDetail: state.cart.cartDetail,
+});
+
+const mapDispatchToProps = {
+  getCartDetail,
+  createCart,
+  updateCart,
+};
+
+export default withTranslation()(
+  connect(mapStateToProps, mapDispatchToProps)(AddToCartButton)
+);

@@ -1,5 +1,4 @@
 // import { insertNewOrder } from "../../services/api/apiService";
-import { useSelector } from "react-redux";
 import { Button } from "antd";
 
 function OrderButton({
@@ -10,11 +9,11 @@ function OrderButton({
   idList,
   quantityList,
 }) {
-  const username = useSelector((state) => state.userLogIn.username);
-  const customer_id = useSelector((state) => state.userLogIn.customer_id);
+  const username = window.localStorage.getItem('userInfo')
+  const customer_id = window.localStorage.getItem('userId')
 
   const Order = async () => {
-    if (username !== "") {
+    if (username) {
       const data = {
         status: "Đã đặt",
         customerId: customer_id,

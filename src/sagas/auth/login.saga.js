@@ -30,6 +30,7 @@ function* doLogin(action) {
       // Save refresh to ken to local storage
       // Save user infomation to local storage
       localStorage.setItem('userInfo', data);
+      localStorage.setItem('userId', data.id)
       yield put(loginSuccess(data));
 
       // Call callback action if provided

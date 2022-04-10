@@ -1,14 +1,18 @@
-import "../../style/Homepage.css";
+import "../../containers/home/home.scss";
 import { useEffect, useState } from "react";
 import CategoryProductList from "./CategoryProductList";
-import { getAllCategories } from "../../services/api/apiService";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { searchCategory } from "../../stores/category/category.action";
+import { searchProduct } from "../../stores/product/product.action";
 
-function MainContent() {
-  const [categoryList, setCategoryList] = useState([]);
+function MainContent(props) {
+  const { categoryList, productList } = props;
   useEffect(async function () {
-    let res = await getAllCategories();
-    setCategoryList(res.data.data);
+    props.searchCategory();
+    props.searchProduct();
   }, []);
 
   return (
@@ -16,7 +20,7 @@ function MainContent() {
       {categoryList.map((i) => {
         return (
           <>
-            <CategoryProductList category={i.name} categoryId={i.id} />
+            <CategoryProductList list={productList.filter(product => product.category.id === i.id)} category={i.name} categoryId={i.id} />
             <center>
               <Link style={{ textDecoration: "none" }} to={`category/${i.id}`}>
                 <Button variant="outlined" color="secondary">
@@ -31,4 +35,11 @@ function MainContent() {
   );
 }
 
-export default MainContent;
+const mapStateToProps = (state) => ({
+  categoryList: state.category.categoryList,
+  productList: state.product.productList
+});
+
+const mapDispatchToProps = { searchCategory, searchProduct };
+
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(MainContent));

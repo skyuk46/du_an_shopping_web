@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import OrderButton from "../Button/OrderButton";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import { withTranslation } from "react-i18next";
 
 function Bill(props) {
@@ -12,11 +11,11 @@ function Bill(props) {
   var totalPriceWithOutDeliverFee = 0;
   var quantityList = [];
   var idList = [];
-  for (let i = 0; i < productList.length; i++) {
-    totalPriceWithOutDeliverFee += productList[i].price * productList[i].amount;
-    quantityList.push(productList[i].amount);
-    idList.push(productList[i].id)
-  }
+  // for (let i = 0; i < productList.length; i++) {
+  //   totalPriceWithOutDeliverFee += productList[i].price * productList[i].amount;
+  //   quantityList.push(productList[i].amount);
+  //   idList.push(productList[i].id)
+  // }
 
   var totalPrice = totalPriceWithOutDeliverFee + 28000;
 

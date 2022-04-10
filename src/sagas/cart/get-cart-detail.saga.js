@@ -1,10 +1,10 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { api } from '../../services/api';
+import { call, put, takeLatest } from "redux-saga/effects";
+import { api } from "../../services/api";
 import {
   getCartDetailSuccess,
   getCartDetailFailed,
-  GET_CART_DETAIL_START
-} from '../../stores/cart/cart.action';
+  GET_CART_DETAIL_START,
+} from "../../stores/cart/cart.action";
 /**
  * Get cart detail
  * @param {any} params Params will be sent to server
@@ -12,7 +12,7 @@ import {
  */
 const getCartDetailApi = (params) => {
   const uri = `/card/user`;
-  return api.post(uri, params);
+  return api.get(uri, params);
 };
 
 /**
@@ -22,7 +22,7 @@ const getCartDetailApi = (params) => {
 function* doGetCartDetail(action) {
   try {
     const response = yield call(getCartDetailApi, action?.payload);
-    if (response?.status) {
+    if (response?.data) {
       const { data } = response;
 
       yield put(getCartDetailSuccess(data));

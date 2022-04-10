@@ -2,6 +2,15 @@ export const GET_CART_DETAIL_START = 'GET_CART_DETAIL_START';
 export const GET_CART_DETAIL_SUCCESS = 'GET_CART_DETAIL_SUCCESS';
 export const GET_CART_DETAIL_FAILED = 'GET_CART_DETAIL_FAILED';
 
+export const CREATE_CART_START = 'CREATE_CART_START';
+export const CREATE_CART_SUCCESS = 'CREATE_CART_SUCCESS';
+export const CREATE_CART_FAILED = 'CREATE_CART_FAILED';
+
+export const UPDATE_CART_START = 'UPDATE_CART_START';
+export const UPDATE_CART_SUCCESS = 'UPDATE_CART_SUCCESS';
+export const UPDATE_CART_FAILED = 'UPDATE_CART_FAILED';
+
+
 /**
  * Get cart detail
  */
@@ -36,3 +45,70 @@ export function getCartDetailFailed() {
   };
 }
 
+/**
+ * Create cart
+ */
+ export function createCart(payload, onSuccess, onError) {
+  return {
+    type: CREATE_CART_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * Create cart success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function createCartSuccess(payload) {
+  return {
+    type: CREATE_CART_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * Create cart failed action
+ * @returns {object}
+ */
+export function createCartFailed() {
+  return {
+    type: CREATE_CART_FAILED,
+  };
+}
+
+/**
+ * Update cart
+ */
+ export function updateCart(payload, onSuccess, onError) {
+  return {
+    type: UPDATE_CART_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * Update cart success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function updateCartSuccess(payload) {
+  return {
+    type: UPDATE_CART_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * Update cart failed action
+ * @returns {object}
+ */
+export function updateCartFailed() {
+  return {
+    type: UPDATE_CART_FAILED,
+  };
+}
