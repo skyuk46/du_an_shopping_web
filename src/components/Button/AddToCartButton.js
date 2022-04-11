@@ -9,8 +9,9 @@ import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
 function AddToCartButton(props) {
-  const { product, amount = 1, flexDirection = "row" } = props;
+  const { product, amount, flexDirection = "row" } = props;
   const [openLoginModal, setOpenLoginModal] = useState(false);
+
   const AddToCart = () => {
     if (!window.localStorage.getItem("token")) setOpenLoginModal(true);
     else {

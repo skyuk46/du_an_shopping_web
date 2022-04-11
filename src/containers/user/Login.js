@@ -37,7 +37,7 @@ function Login(props) {
   return (
     <div id="login-container">
       <div id="login">
-        <div class="title">{t("user.loginTitle")}</div>
+        <div className="title">{t("user.loginTitle")}</div>
         <Form
           {...layout}
           name="user-form"

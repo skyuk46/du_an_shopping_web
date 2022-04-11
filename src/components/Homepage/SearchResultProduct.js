@@ -5,7 +5,7 @@ function SearchResultProduct(props) {
   const { product, setDisplaySearchResult } = props;
   return (
     <Link onClick={() => setDisplaySearchResult("none")} style={{ textDecoration: "none", color: "black" }} to={`/products/${product.id}`}>
-      <div class="search-result-product-container">
+      <div className="search-result-product-container">
         <img src={product.images} width="100" alt="img" />
         <div style={{ marginLeft: "20px" }}>
           <div>{product.name}</div>

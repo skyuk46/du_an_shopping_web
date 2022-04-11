@@ -5,9 +5,9 @@ import { Card } from "antd";
 
 function Product({ flexDirection = "row", product }) {
   return (
-    <div class="product">
+    <div className="product">
       {flexDirection === "row" ? (
-        <>
+        <Link to={`product/${product.id}`}>
           <img
             src={product.image[0].link}
             alt={product.name}
@@ -17,13 +17,13 @@ function Product({ flexDirection = "row", product }) {
             <center>{product.name}</center>
           </Card>
           <Card>
-            <span style={{ marginRight: "4vw" }}>
+            <span style={{ marginRight: "3vw" }}>
               {product.price.replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
             </span>
             <span>Còn lại: {product.quantity}</span>
           </Card>
           <AddToCartButton flexDirection={flexDirection} product={product} />
-        </>
+        </Link>
       ) : (
         <>
           <div style={{ display: "flex", flexDirection: "row" }}>

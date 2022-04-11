@@ -5,6 +5,8 @@ import Home from '../home';
 import Login from '../user/Login';
 import Register from '../user/Register'
 import Cart from '../cart/Cart';
+import ProductDetail from '../product/ProductDetail'
+
 /**
  *
  * @returns {*}
@@ -18,6 +20,7 @@ export default function AppContainer() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
+          <Route path="/product/:id" component={ProductDetail} />
         </Switch>
       </Router>
     </div>

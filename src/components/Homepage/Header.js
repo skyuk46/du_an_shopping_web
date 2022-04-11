@@ -77,7 +77,7 @@ function Header(props) {
   return (
     <>
       <div id="header-container">
-        <Row style={{ height: 'inherit' }} direction="row" justifyContent="space-evenly" spacing={4}>
+        <Row style={{ height: 'inherit' }}>
           <Col span={4}>
             <Link to="/">
               <img
@@ -156,7 +156,6 @@ function Header(props) {
               );
             })}
           </Col>
-          <Row item md={2} sm={false} xs={false}></Row>
         </Row>
         {/* <MenuBar /> */}
       </div>

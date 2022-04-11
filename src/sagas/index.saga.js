@@ -12,6 +12,7 @@ import watchSearchCategory from './category/search-category.saga';
 // product
 import watchSearchProduct from './product/search-product.saga';
 import watchGetProductByCategory from './product/get-product-by-category.saga';
+import watchGetProductDetail from './product/get-product-detail.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     // product
     watchSearchProduct(),
     watchGetProductByCategory(),
+    watchGetProductDetail(),
   ])
 }

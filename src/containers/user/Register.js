@@ -44,7 +44,7 @@ function Register(props) {
           </div>
         ) : (
           <>
-            <div class="title">{t('user.createAccount')}</div>
+            <div className="title">{t('user.createAccount')}</div>
             <Form
               {...layout}
               name="register-form"

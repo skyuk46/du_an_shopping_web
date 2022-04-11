@@ -13,7 +13,7 @@ function CategoryProductList(props) {
 
   return (
     <div>
-      <div class="category-name">{category}</div>
+      <div className="category-name">{category}</div>
       <List
         grid={{ gutter: 16, column: 5 }}
         dataSource={list}

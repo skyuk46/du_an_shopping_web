@@ -6,6 +6,10 @@ export const GET_PRODUCT_BY_CATEGORY_START = 'GET_PRODUCT_BY_CATEGORY_START';
 export const GET_PRODUCT_BY_CATEGORY_SUCCESS = 'GET_PRODUCT_BY_CATEGORY_SUCCESS';
 export const GET_PRODUCT_BY_CATEGORY_FAILED = 'GET_PRODUCT_BY_CATEGORY_FAILED';
 
+export const GET_PRODUCT_DETAIL_START = 'GET_PRODUCT_DETAIL_START';
+export const GET_PRODUCT_DETAIL_SUCCESS = 'GET_PRODUCT_DETAIL_SUCCESS';
+export const GET_PRODUCT_DETAIL_FAILED = 'GET_PRODUCT_DETAIL_FAILED';
+
 /**
  * Search product
  */
@@ -71,5 +75,39 @@ export function getProductByCategorySuccess(payload) {
 export function getProductByCategoryFailed() {
   return {
     type: GET_PRODUCT_BY_CATEGORY_FAILED,
+  };
+}
+
+/**
+ * Get product detail
+ */
+ export function getProductDetail(payload, onSuccess, onError) {
+  return {
+    type: GET_PRODUCT_DETAIL_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * Get product detail success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function getProductDetailSuccess(payload) {
+  return {
+    type: GET_PRODUCT_DETAIL_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * Get product detail failed action
+ * @returns {object}
+ */
+export function getProductDetailFailed() {
+  return {
+    type: GET_PRODUCT_DETAIL_FAILED,
   };
 }
