@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { Input, Button, Form } from "antd";
+import logo from "../../assets/images/logo.png";
 import "./user.scss";
 
 const layout = {
@@ -29,6 +30,9 @@ function Register(props) {
   return (
     <div id="login-container">
       <div id="login">
+        <center>
+          <img id="logo" src={logo} width="200px" alt="logo" />
+        </center>
         {registered ? (
           <div>
             <div
@@ -138,6 +142,7 @@ function Register(props) {
                 />
               </Form.Item>
               <Button
+                className="submit_button"
                 type="primary"
                 htmlType="submit"
               >
@@ -145,7 +150,7 @@ function Register(props) {
               </Button>
             </Form>
             <br />
-            <div style={{ fontSize: "12px", marginTop: "20px" }}>
+            <div className="footer_tip">
               <Link to="/login">{t('user.haveAccount')}</Link>
             </div>
           </>

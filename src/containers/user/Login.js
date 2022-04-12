@@ -5,6 +5,7 @@ import { Input, Button, Form } from "antd";
 import { login } from "../../stores/auth/auth.action";
 import { connect } from "react-redux";
 import { redirectRouter } from "../../utils/router";
+import logo from "../../assets/images/logo.png";
 import "./user.scss";
 
 const layout = {
@@ -18,7 +19,7 @@ const layout = {
 
 function Login(props) {
   useEffect(function () {
-    document.title = t('user.login');
+    document.title = t("user.login");
   }, []);
 
   const [form] = Form.useForm();
@@ -26,17 +27,23 @@ function Login(props) {
 
   const onFinish = (values) => {
     const { email, password } = values;
-    props.login({
-      email,
-      password
-    }, () => {
-      redirectRouter('/')
-    })
+    props.login(
+      {
+        email,
+        password,
+      },
+      () => {
+        redirectRouter("/");
+      }
+    );
   };
 
   return (
     <div id="login-container">
       <div id="login">
+        <center>
+          <img id="logo" src={logo} width="200px" alt="logo" />
+        </center>
         <div className="title">{t("user.loginTitle")}</div>
         <Form
           {...layout}
@@ -70,6 +77,7 @@ function Login(props) {
             <Input type="password" />
           </Form.Item>
           <Button
+            className="submit_button"
             type="primary"
             htmlType="submit"
           >
@@ -77,7 +85,7 @@ function Login(props) {
           </Button>
         </Form>
         <br />
-        <div style={{ fontSize: "12px", marginTop: "20px" }}>
+        <div className="footer_tip">
           <Link to="/register">{t("user.dontHaveAccount")}</Link>
         </div>
       </div>
@@ -85,9 +93,10 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = { login };
 
-export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default withTranslation()(
+  connect(mapStateToProps, mapDispatchToProps)(Login)
+);

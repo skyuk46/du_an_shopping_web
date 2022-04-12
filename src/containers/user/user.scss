@@ -23,4 +23,15 @@
   button {
     float: right;
   }
+  .footer_tip {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .footer_tip:hover {
+    cursor: pointer;
+  }
+  .submit_button {
+    background-color: #69f0ae;
+    border: none;
+  }
 }
