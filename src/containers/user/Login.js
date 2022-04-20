@@ -23,7 +23,7 @@ function Login(props) {
   }, []);
 
   const [form] = Form.useForm();
-  const { t } = props;
+  const { t, message } = props;
 
   const onFinish = (values) => {
     const { email, password } = values;
@@ -84,6 +84,7 @@ function Login(props) {
             {t("user.login")}
           </Button>
         </Form>
+        <center class="error-message">{message !== '' && message}</center>
         <br />
         <div className="footer_tip">
           <Link to="/register">{t("user.dontHaveAccount")}</Link>
@@ -93,7 +94,9 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  message: state.auth.message
+});
 
 const mapDispatchToProps = { login };
 

@@ -29,7 +29,7 @@ function* doLogin(action) {
       localStorage.setItem('token', 'Bearer ' + token);
       // Save refresh to ken to local storage
       // Save user infomation to local storage
-      localStorage.setItem('userInfo', data);
+      localStorage.setItem('userInfo', JSON.stringify(data));
       localStorage.setItem('userId', data.id)
       yield put(loginSuccess(data));
 
@@ -41,7 +41,8 @@ function* doLogin(action) {
       throw new Error(response?.message);
     }
   } catch (error) {
-    yield put(loginFailed());
+    console.log(error)
+    yield put(loginFailed(error));
     // Call callback action if provided
     if (action.onError) {
       yield action.onError();

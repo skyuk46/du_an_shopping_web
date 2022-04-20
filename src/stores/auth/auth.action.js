@@ -37,9 +37,10 @@ export function loginSuccess(payload) {
  * Login failed action
  * @returns {object}
  */
-export function loginFailed() {
+export function loginFailed(payload) {
   return {
     type: LOGIN_FAILED,
+    payload: payload
   };
 }
 

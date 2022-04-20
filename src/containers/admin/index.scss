@@ -1,0 +1,68 @@
+#admin-container {
+  #header-container {
+      height: fit-content;
+      background-color: lightskyblue;
+      padding: 15px 30px;
+      #header-title {
+          display: inline-block;
+          font-size: 30px;
+          font-weight: bold;
+      }
+      #log-out {
+          float: right;
+      }
+  }
+  #content-container {
+      padding: 3vw;
+      #title {
+          font-size: 28px;
+          margin-bottom: 1vw;
+      }
+      .feature-container {
+          width: 90%;
+          .admin-feature {
+              color: white;
+              font-size: 18px;
+              background-color: lightskyblue;
+              padding: 10px;
+          }
+          .table-container {
+              border: rgba($color: black, $alpha: 0.2) solid 1px;
+              padding: 10px;
+              .float_right {
+                  float: right;
+                  margin: 0 5px;
+              }
+          }    
+      }
+      .template-container {
+          width: 90%;
+          padding: 15px;
+          margin-top: 2vw;
+          border: rgba($color: black, $alpha: 0.2) solid 1px;
+          #title {
+              font-size: 24px;
+              button {
+                  float: right;
+              }
+              #isSave {
+                  color: green;
+                  margin-right: 10px;
+                  float: right;
+              }
+          }
+          .MuiInputBase-root {
+              margin: 0.5vw 0;
+          }
+          table ,th,td {
+              text-align: center;
+              padding: 5px;
+              border: black 1px solid;
+              border-collapse: collapse;
+              #description-textfield {
+                  min-width: 120px;
+              }
+          }
+      }
+  }
+}

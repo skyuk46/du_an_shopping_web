@@ -18,17 +18,16 @@ const logoutApi = (params) => {
 function* doLogout(action) {
   try {
     const response = yield call(logoutApi, action?.payload);
+    // Remove token from local storage
+    window.localStorage.removeItem('token');
+
+    // Save refresh token from local storage
+    window.localStorage.removeItem('userInfo');
+
+    // Redirect to home
+    window.location.reload();
+
     if (response?.status) {
-
-      // Remove token from local storage
-      window.localStorage.removeItem('token');
-
-      // Save refresh token from local storage
-      window.localStorage.removeItem('userInfo');
-      
-      // Redirect to home
-      window.location.reload();
-
       yield put(logoutSuccess());
     } else {
       throw new Error(response?.message);

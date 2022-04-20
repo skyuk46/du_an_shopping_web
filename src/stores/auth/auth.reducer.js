@@ -10,6 +10,7 @@ import {
 const initialState = {
   isLoading: false,
   userInfo: {},
+  message: ''
 };
 
 /**
@@ -36,12 +37,14 @@ export default function auth(state = initialState, action) {
         ...state,
         isLoading: false,
         userInfo: action.payload,
+        message: ''
       };
     case LOGIN_FAILED:
     case LOGOUT_FAILED:
       return {
         ...state,
         isLoading: false,
+        message: action.payload
       };
     default:
       return state;

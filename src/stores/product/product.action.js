@@ -10,6 +10,18 @@ export const GET_PRODUCT_DETAIL_START = 'GET_PRODUCT_DETAIL_START';
 export const GET_PRODUCT_DETAIL_SUCCESS = 'GET_PRODUCT_DETAIL_SUCCESS';
 export const GET_PRODUCT_DETAIL_FAILED = 'GET_PRODUCT_DETAIL_FAILED';
 
+export const CREATE_PRODUCT_START = 'CREATE_PRODUCT_START';
+export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
+export const CREATE_PRODUCT_FAILED = 'CREATE_PRODUCT_FAILED';
+
+export const UPDATE_PRODUCT_START = 'UPDATE_PRODUCT_START';
+export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS';
+export const UPDATE_PRODUCT_FAILED = 'UPDATE_PRODUCT_FAILED';
+
+export const DELETE_PRODUCT_START = 'DELETE_PRODUCT_START';
+export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+export const DELETE_PRODUCT_FAILED = 'DELETE_PRODUCT_FAILED';
+
 /**
  * Search product
  */
@@ -109,5 +121,107 @@ export function getProductDetailSuccess(payload) {
 export function getProductDetailFailed() {
   return {
     type: GET_PRODUCT_DETAIL_FAILED,
+  };
+}
+
+/**
+ * create product
+ */
+ export function createProduct(payload, onSuccess, onError) {
+  return {
+    type: CREATE_PRODUCT_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * create product success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function createProductSuccess(payload) {
+  return {
+    type: CREATE_PRODUCT_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * create product failed action
+ * @returns {object}
+ */
+export function createProductFailed() {
+  return {
+    type: CREATE_PRODUCT_FAILED,
+  };
+}
+
+/**
+ * update product
+ */
+ export function updateProduct(payload, onSuccess, onError) {
+  return {
+    type: UPDATE_PRODUCT_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * update product success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function updateProductSuccess(payload) {
+  return {
+    type: UPDATE_PRODUCT_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * update product failed action
+ * @returns {object}
+ */
+export function updateProductFailed() {
+  return {
+    type: UPDATE_PRODUCT_FAILED,
+  };
+}
+
+/**
+ * delete product
+ */
+ export function deleteProduct(payload, onSuccess, onError) {
+  return {
+    type: DELETE_PRODUCT_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * delete product success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function deleteProductSuccess(payload) {
+  return {
+    type: DELETE_PRODUCT_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * delete product failed action
+ * @returns {object}
+ */
+export function deleteProductFailed() {
+  return {
+    type: DELETE_PRODUCT_FAILED,
   };
 }

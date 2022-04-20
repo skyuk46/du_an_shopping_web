@@ -6,6 +6,7 @@ import Login from '../user/Login';
 import Register from '../user/Register'
 import Cart from '../cart/Cart';
 import ProductDetail from '../product/ProductDetail'
+import Admin from '../admin/Admin'
 
 /**
  *
@@ -21,6 +22,7 @@ export default function AppContainer() {
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
           <Route path="/product/:id" component={ProductDetail} />
+          <Route path="/admin" component={Admin} />
         </Switch>
       </Router>
     </div>
