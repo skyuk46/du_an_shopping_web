@@ -6,32 +6,32 @@ import { withTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
 function EditProductTemplate(props) {
-  const { productList } = props;
-  const [isEdit, setIsEdit] = useState(false);
-  const [isSave, setIsSave] = useState(false);
-  const [editingId, setEditingId] = useState(-1);
+  // const { productList } = props;
+  // const [isEdit, setIsEdit] = useState(false);
+  // const [isSave, setIsSave] = useState(false);
+  // const [editingId, setEditingId] = useState(-1);
 
-  const Save = async () => {
-    let request = {
-      "id": id,
-      "name": name,
-      "price": price,
-      "categoryId": categoryId,
-      "status": status,
-      "description": description,
-      "quantityInStock": quantityInStock,
-      "images": images
-    }
-    props.updateProduct(request).then(res => {
-      setIsSave(true);
-      props.searchProduct();
-      setIsEdit(false);
-    });
-  }
+  // const Save = async () => {
+  //   let request = {
+  //     "id": id,
+  //     "name": name,
+  //     "price": price,
+  //     "categoryId": categoryId,
+  //     "status": status,
+  //     "description": description,
+  //     "quantityInStock": quantityInStock,
+  //     "images": images
+  //   }
+  //   props.updateProduct(request).then(res => {
+  //     setIsSave(true);
+  //     props.searchProduct();
+  //     setIsEdit(false);
+  //   });
+  // }
 
   return (
     <div class="template-container">
-      <div id="title">
+      {/* <div id="title">
         Sửa thông tin mặt hàng
         <Button onClick={Save} variant="contained" style={{ backgroundColor: "green", color: "white" }}>Lưu</Button>
         {
@@ -95,7 +95,7 @@ function EditProductTemplate(props) {
             )
           })
         }
-      </table>
+      </table> */}
     </div>
   );
 }
