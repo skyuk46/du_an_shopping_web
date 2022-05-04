@@ -17,7 +17,8 @@ function AddToCartButton(props) {
     else {
       props.getCartDetail(window.localStorage.getItem("token"), () => {
         const { cartDetail } = props;
-        if (cartDetail.length === 0)
+        const productInCart = cartDetail.find(i => i.product.id === product.id)
+        if (!productInCart)
           props.createCart({
             token: window.localStorage.getItem("token"),
             product_id: product.id,
@@ -26,6 +27,7 @@ function AddToCartButton(props) {
           })
         else
           props.updateCart({
+            id: productInCart.id,
             token: window.localStorage.getItem("token"),
             product_id: product.id,
             amount: 1,

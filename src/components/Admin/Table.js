@@ -21,9 +21,9 @@ function Table(props) {
     setAddCategoryTemplate,
     setViewCategoryTemplate,
     setEditCategoryTemplate,
+    viewOrderTemplate,
+    setViewOrderTemplate,
   } = props;
-
-  // var viewOrderTemplate = useSelector((state) => state.template.viewOrderTemplate);
 
   const AddTemplate = () => {
     if (name === "Product")
@@ -43,17 +43,11 @@ function Table(props) {
         setViewProductTemplate(false);
       }
     else if (name === "Order") {
-      // if (viewOrderTemplate === false) {
-      //   dispatch(setViewOrderTemplateOn());
-      //   let res = await getAllOrderdetail();
-      //   let request = {
-      //     orderList: res.data.data,
-      //   };
-      //   dispatch(setOrderListOn(request));
-      // } else {
-      //   dispatch(setViewOrderTemplateOff());
-      //   dispatch(setOrderListOff());
-      // }
+      if (viewOrderTemplate === false) {
+        setViewOrderTemplate(true);
+      } else {
+        setViewOrderTemplate(false);
+      }
     } else if (name === "Category") {
       if (viewCategoryTemplate === false) {
         setViewCategoryTemplate(true);

@@ -7,7 +7,7 @@ import { useState } from "react";
 import AddProductTemplate from "./AddProductTemplate"
 import ViewProductTemplate from "./ViewProductTemplate";
 import EditProductTemplate from './EditProductTemplate'
-// import ViewOrderTemplate from './ViewOrderTemplate'
+import ViewOrderTemplate from './ViewOrderTemplate'
 import AddCategoryTemplate from "./AddCategoryTemplate";
 import ViewCategoryTemplate from "./ViewCategoryTemplate";
 import EditCategoryTemplate from "./EditCategoryTemplate";
@@ -25,17 +25,15 @@ function MainContent(props) {
   const [viewProductTemplate, setViewProductTemplate] = useState(false);
   const [editProductTemplate, setEditProductTemplate] = useState(false);
 
-  // const viewOrderTemplate = useSelector((state) => state.template.viewOrderTemplate);
+  const [viewOrderTemplate, setViewOrderTemplate] = useState(false);
 
   const [addCategoryTemplate, setAddCategoryTemplate] = useState(false);
   const [viewCategoryTemplate, setViewCategoryTemplate] = useState(false);
   const [editCategoryTemplate, setEditCategoryTemplate] = useState(false);
 
-  // const orderList = useSelector((state) => state.orderList.orderList);
-
   return (
     <Row id="content-container">
-      <Col span={12}>
+      <Col span={11}>
         <div id="title">Chức năng admin</div>
         {featureList.map((i) => {
           return (
@@ -48,12 +46,14 @@ function MainContent(props) {
               addCategoryTemplate={addCategoryTemplate}
               viewCategoryTemplate={viewCategoryTemplate}
               editCategoryTemplate={editCategoryTemplate}
+              viewOrderTemplate={viewOrderTemplate}
               setAddProductTemplate={setAddProductTemplate}
               setViewProductTemplate={setViewProductTemplate}
               setEditProductTemplate={setEditProductTemplate}
               setAddCategoryTemplate={setAddCategoryTemplate}
               setViewCategoryTemplate={setViewCategoryTemplate}
               setEditCategoryTemplate={setEditCategoryTemplate}
+              setViewOrderTemplate={setViewOrderTemplate}
             />
           );
         })}
@@ -65,16 +65,16 @@ function MainContent(props) {
           <EditCategoryTemplate categoryList={categoryList} />
         )}
       </Col>
-      <Col span={12}>
+      <Col span={13}>
         {
           addProductTemplate && <AddProductTemplate />
         }
         {
           viewProductTemplate && <ViewProductTemplate productList={productList} />
         }
-        {/* {
-          viewOrderTemplate && <ViewOrderTemplate orderList={orderList} />
-        } */}
+        {
+          viewOrderTemplate && <ViewOrderTemplate />
+        }
         {
           editProductTemplate && <EditProductTemplate productList={productList} />
         }

@@ -1,19 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { api } from '../../services/api';
 import {
-  updateCartSuccess,
-  updateCartFailed,
-  UPDATE_CART_START
+  deleteAllCartsSuccess,
+  deleteAllCartsFailed,
+  DELETE_ALL_CARTS_START
 } from '../../stores/cart/cart.action';
 /**
- * Update cart
+ * Delete all cart
  * @param {any} params Params will be sent to server
  * @returns {Promise}
  */
-const updateCartApi = (params) => {
-  const id = params.id;
-  delete params.id;
-  const uri = `/card/update/${id}`;
+const deleteAllCartsApi = (params) => {
+  const uri = `/card/delete/user`;
   return api.post(uri, params);
 };
 
@@ -21,13 +19,13 @@ const updateCartApi = (params) => {
  * Handle get data request and response
  * @param {object} action
  */
-function* doUpdateCart(action) {
+function* doDeleteAllCarts(action) {
   try {
-    const response = yield call(updateCartApi, action?.payload);
+    const response = yield call(deleteAllCartsApi, action?.payload);
     if (response?.status) {
       const { data } = response;
 
-      yield put(updateCartSuccess(data));
+      yield put(deleteAllCartsSuccess(data));
 
       // Call callback action if provided
       if (action.onSuccess) {
@@ -37,7 +35,7 @@ function* doUpdateCart(action) {
       throw new Error(response?.message);
     }
   } catch (error) {
-    yield put(updateCartFailed());
+    yield put(deleteAllCartsFailed());
     // Call callback action if provided
     if (action.onError) {
       yield action.onError();
@@ -46,8 +44,8 @@ function* doUpdateCart(action) {
 }
 
 /**
- * Watch update cart
+ * Watch delete all cart
  */
-export default function* watchUpdateCart() {
-  yield takeLatest(UPDATE_CART_START, doUpdateCart);
+export default function* watchDeleteAllCarts() {
+  yield takeLatest(DELETE_ALL_CARTS_START, doDeleteAllCarts);
 }

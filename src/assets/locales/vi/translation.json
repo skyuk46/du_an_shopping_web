@@ -40,6 +40,24 @@
     "registerSuccessfully": "Đăng ký thành công",
     "backToHome": "Về trang chủ"
   },
+  "product": {
+    "name": "Tên sản phẩm",
+    "description": "Mô tả",
+    "quantity": "Số lượng",
+    "price": "Giá",
+    "category": "Loại sản phẩm",
+    "add": "Thêm sản phẩm",
+    "mainImage": "Ảnh chính",
+    "secondImage": "Ảnh phụ"
+  },
+  "order": {
+    "list": "Danh sách giao dịch",
+    "total": "Tổng tiền",
+    "quantity": "Số lượng",
+    "shippedDate": "Ngày giao hàng",
+    "status": "Trạng thái",
+    "product": "Sản phẩm"
+  },
   "cart": {
     "title": "Giỏ hàng"
   },

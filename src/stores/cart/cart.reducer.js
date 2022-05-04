@@ -7,7 +7,13 @@ import {
   CREATE_CART_FAILED,
   UPDATE_CART_START,
   UPDATE_CART_SUCCESS,
-  UPDATE_CART_FAILED
+  UPDATE_CART_FAILED,
+  DELETE_CART_START,
+  DELETE_CART_SUCCESS,
+  DELETE_CART_FAILED,
+  DELETE_ALL_CARTS_START,
+  DELETE_ALL_CARTS_SUCCESS,
+  DELETE_ALL_CARTS_FAILED
 } from "./cart.action";
 
 const initialState = {
@@ -26,6 +32,8 @@ export default function cart(state = initialState, action) {
     case GET_CART_DETAIL_START:
     case CREATE_CART_START:
     case UPDATE_CART_START:
+    case DELETE_CART_START:
+    case DELETE_ALL_CARTS_START:
       return {
         ...state,
         isLoading: true
@@ -46,6 +54,10 @@ export default function cart(state = initialState, action) {
     case CREATE_CART_FAILED:
     case UPDATE_CART_SUCCESS:
     case UPDATE_CART_FAILED:
+    case DELETE_CART_SUCCESS:
+    case DELETE_CART_FAILED:
+    case DELETE_ALL_CARTS_SUCCESS:
+    case DELETE_ALL_CARTS_FAILED:
       return {
         ...state,
         isLoading: false,

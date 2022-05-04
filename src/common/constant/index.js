@@ -4,3 +4,14 @@ export const NOTIFICATION_TYPE = {
   INFO: 'info',
   WARNING: 'warning',
 };
+
+export const ORDER_STATUS = [
+  {
+    value: 'pending',
+    label: 'Chờ thanh toán'
+  },
+  {
+    value: 'cancel',
+    label: 'Đã thanh toán'
+  }
+] 

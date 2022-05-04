@@ -10,7 +10,11 @@ function DetailedInfo({ product }) {
           <div className="content">
             {product.image && (
               <center>
-                <img src={product?.image[0]?.link} alt="desImg" width="350px" />
+                <img
+                  src={product?.image.length > 0 ? product?.image[0]?.link : ""}
+                  alt="desImg"
+                  width="350px"
+                />
               </center>
             )}
             <br />

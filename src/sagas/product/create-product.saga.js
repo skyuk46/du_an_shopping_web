@@ -11,8 +11,8 @@ import {
  * @returns {Promise}
  */
 const createProductApi = (params) => {
-  const uri = `/product/store/`;
-  return api.post(uri, params);
+  const uri = `/product/store`;
+  return api.postMultiplePart(uri, params);
 };
 
 /**

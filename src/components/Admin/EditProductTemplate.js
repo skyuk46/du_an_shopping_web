@@ -1,37 +1,168 @@
 import "../../containers/admin/index.scss";
-import { Input, Button } from "antd"
-import { Fragment, useState } from "react"
+import { Input, Button, Table } from "antd"
+import { useState } from "react"
 import { searchProduct, updateProduct } from "../../stores/product/product.action"
 import { withTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
 function EditProductTemplate(props) {
-  // const { productList } = props;
-  // const [isEdit, setIsEdit] = useState(false);
-  // const [isSave, setIsSave] = useState(false);
-  // const [editingId, setEditingId] = useState(-1);
+  const { productList } = props;
+  const [editName, setEditName] = useState("");
+  const [editPrice, setEditPrice] = useState(1);
+  const [editQuantity, setEditQuantity] = useState(1);
+  const [editDescription, setEditDescription] = useState("");
+  const [isSave, setIsSave] = useState(false);
+  const [editingId, setEditingId] = useState(-1);
 
-  // const Save = async () => {
-  //   let request = {
-  //     "id": id,
-  //     "name": name,
-  //     "price": price,
-  //     "categoryId": categoryId,
-  //     "status": status,
-  //     "description": description,
-  //     "quantityInStock": quantityInStock,
-  //     "images": images
-  //   }
-  //   props.updateProduct(request).then(res => {
-  //     setIsSave(true);
-  //     props.searchProduct();
-  //     setIsEdit(false);
-  //   });
-  // }
+  const Save = async () => {
+    const imageList = productList.find(product => product.id === editingId)?.image
+    let request = {
+      "id": editingId,
+      "name": editName,
+      "price": editPrice,
+      "categoryId": productList.find(product => product.id === editingId)?.category.id,
+      "description": editDescription,
+      "quantity": editQuantity,
+      "product_file_main": imageList[0],
+      "product_file_secondary": imageList.splice(1, imageList.length - 1),
+      token: window.localStorage.getItem("token"),
+    }
+    props.updateProduct(request).then(res => {
+      setIsSave(true);
+      props.searchProduct();
+    });
+  }
 
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Tên sản phẩm",
+      dataIndex: "name",
+      key: "name",
+      render: (name, row) => {
+        const { id } = row;
+        if (editingId === id)
+          return (
+            <Input
+              value={editName}
+              onChange={(event) => setEditName(event.target.value)}
+            />
+          );
+        else return name;
+      },
+    },
+    {
+      title: "Loại sản phẩm",
+      dataIndex: "category",
+      key: "category",
+      render: (params, row) => {
+        const { category } = row;
+        return category.name;
+      },
+    },
+    {
+      title: "Giá",
+      dataIndex: "price",
+      key: "price",
+      render: (price, row) => {
+        const { id } = row;
+        if (editingId === id)
+          return (
+            <Input
+              value={editPrice}
+              onChange={(event) => setEditPrice(event.target.value)}
+            />
+          );
+        else return price;
+      },
+    },
+    {
+      title: "Số lượng",
+      dataIndex: "quantity",
+      key: "quantity",
+      render: (quantity, row) => {
+        const { id } = row;
+        if (editingId === id)
+          return (
+            <Input
+              value={editQuantity}
+              onChange={(event) => setEditQuantity(event.target.value)}
+            />
+          );
+        else return quantity;
+      },
+    },
+    {
+      title: "Mô tả",
+      dataIndex: "description",
+      key: "description",
+      render: (description, row) => {
+        const { id } = row;
+        if (editingId === id)
+          return (
+            <Input
+              value={editDescription}
+              onChange={(event) => setEditDescription(event.target.value)}
+            />
+          );
+        else return description;
+      },
+    },
+    {
+      title: "Ảnh",
+      dataIndex: "image",
+      key: "image",
+      render: (image, row) => {
+        return (
+          <div class="image-container">
+            {
+              image.map(img => (
+                <img src={img.link} width="120" height="120" alt="img"/>
+              ))
+            }
+          </div>
+        );
+      },
+    },
+    {
+      title: "",
+      dataIndex: "id",
+      key: "edit",
+      width: "100px",
+      render: (id, row) => {
+        const { name, description } = row;
+        return (
+          <Button
+            onClick={() => {
+              setEditingId(id);
+              setIsSave(false);
+              setEditName(name);
+              setEditDescription(description);
+            }}
+          >
+            Sửa
+          </Button>
+        );
+      },
+    },
+  ]
+
+  const dataSource = productList.map(p => ({
+    id: p.id,
+    name: p.name,
+    price: p.price,
+    quantity: p.quantity,
+    description: p.description,
+    category: p.category,
+    image: p.image
+  }))
   return (
-    <div class="template-container">
-      {/* <div id="title">
+    <div className="template-container">
+      <div id="title">
         Sửa thông tin mặt hàng
         <Button onClick={Save} variant="contained" style={{ backgroundColor: "green", color: "white" }}>Lưu</Button>
         {
@@ -40,62 +171,7 @@ function EditProductTemplate(props) {
             : <span></span>
         }
       </div>
-      <table>
-        <tr>
-          <th>Mã sản phẩm</th>
-          <th>Tên sản phẩm</th>
-          <th>Giá</th>
-          <th>Loại mặt hàng</th>
-          <th>Trạng thái</th>
-          <th>Mô tả</th>
-          <th>Số lượng</th>
-          <th>Ảnh</th>
-          <th></th>
-        </tr>
-        {
-          productList.map(i => {
-            if (editingId === i.id) {
-              id = i.id;
-              name = i.name;
-              price = i.price;
-              categoryId = i.categoryId;
-              status = i.status;
-              description = i.description;
-              quantityInStock = i.quantityInStock;
-              images = i.images;
-            }
-
-            return (<Fragment>
-              {
-                (isEdit && editingId === i.id)
-                  ? <tr>
-                    <td><Input placeholder={i.id} onChange={(e) => id = e.target.value} fullWidth size="small" variant="outlined" /></td>
-                    <td><Input placeholder={i.name} onChange={(e) => name = e.target.value} fullWidth size="small" variant="outlined" /></td>
-                    <td><Input placeholder={i.price} onChange={(e) => price = e.target.value} fullWidth size="small" variant="outlined" /></td>
-                    <td><Input placeholder={i.categoryId} onChange={(e) => categoryId = e.target.value} fullWidth size="small" variant="outlined" /></td>
-                    <td><Input placeholder={i.status} onChange={(e) => status = e.target.value} fullWidth size="small" variant="outlined" /></td>
-                    <td><Input id="description-textfield" multiline placeholder={i.description} onChange={(e) => description = e.target.value} fullWidth size="medium" variant="outlined" /></td>
-                    <td><Input placeholder={i.quantityInStock} onChange={(e) => quantityInStock = e.target.value} fullWidth size="small" variant="outlined" /></td>
-                    <td><img width="100px" src={i.images} alt="img" /></td>
-                    <td><Button onClick={() => { setIsEdit(false); setEditingId(-1); }}>Dừng sửa</Button></td>
-                  </tr>
-                  : <tr>
-                    <td>{i.id}</td>
-                    <td>{i.name}</td>
-                    <td>{i.price}</td>
-                    <td>{i.categoryId}</td>
-                    <td>{i.status}</td>
-                    <td>{i.description}</td>
-                    <td>{i.quantityInStock}</td>
-                    <td><img width="100px" src={i.images} alt="img" /></td>
-                    <td><Button onClick={() => { setIsEdit(true); setEditingId(i.id); setIsSave(false) }}>Sửa</Button></td>
-                  </tr>
-              }
-            </Fragment>
-            )
-          })
-        }
-      </table> */}
+      <Table dataSource={dataSource} columns={columns} />
     </div>
   );
 }

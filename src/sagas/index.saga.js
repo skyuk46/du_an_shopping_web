@@ -7,6 +7,8 @@ import watchLogout from './auth/logout.saga';
 import watchGetCartDetail from './cart/get-cart-detail.saga';
 import watchCreateCart from './cart/create-cart.saga';
 import watchUpdateCart from './cart/update-cart.saga';
+import watchDeleteCart from './cart/delete-cart.saga';
+import watchDeleteAllCarts from './cart/delete-all-carts.saga';
 // category
 import watchSearchCategory from './category/search-category.saga';
 import watchCreateCategory from './category/create-category.saga';
@@ -19,6 +21,11 @@ import watchGetProductDetail from './product/get-product-detail.saga';
 import watchCreateProduct from './product/create-product.saga';
 import watchUpdateProduct from './product/update-product.saga';
 import watchDeleteProduct from './product/delete-product.saga';
+//order
+import watchSearchOrder from './order/search-order.saga';
+import watchCreateOrder from './order/create-order.saga';
+import watchUpdateOrder from './order/update-order.saga';
+import watchDeleteOrder from './order/delete-order.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -29,6 +36,8 @@ export default function* rootSaga() {
     watchGetCartDetail(),
     watchCreateCart(),
     watchUpdateCart(),
+    watchDeleteCart(),
+    watchDeleteAllCarts(),
     //category 
     watchSearchCategory(),
     watchCreateCategory(),
@@ -41,5 +50,10 @@ export default function* rootSaga() {
     watchCreateProduct(),
     watchUpdateProduct(),
     watchDeleteProduct(),
+    // order
+    watchSearchOrder(),
+    watchCreateOrder(),
+    watchUpdateOrder(),
+    watchDeleteOrder(),
   ])
 }

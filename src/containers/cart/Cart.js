@@ -18,7 +18,7 @@ function Cart(props) {
     <div id="cart">
       <Header />
       <Row container direction="row" justifyContent="space-evenly" spacing={4}>
-        <Col span={10} offset={2}>
+        <Col span={20} offset={2}>
           <MainContent />
         </Col>
       </Row>

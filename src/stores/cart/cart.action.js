@@ -10,6 +10,13 @@ export const UPDATE_CART_START = 'UPDATE_CART_START';
 export const UPDATE_CART_SUCCESS = 'UPDATE_CART_SUCCESS';
 export const UPDATE_CART_FAILED = 'UPDATE_CART_FAILED';
 
+export const DELETE_CART_START = 'DELETE_CART_START';
+export const DELETE_CART_SUCCESS = 'DELETE_CART_SUCCESS';
+export const DELETE_CART_FAILED = 'DELETE_CART_FAILED';
+
+export const DELETE_ALL_CARTS_START = 'DELETE_ALL_CARTS_START';
+export const DELETE_ALL_CARTS_SUCCESS = 'DELETE_ALL_CARTS_SUCCESS';
+export const DELETE_ALL_CARTS_FAILED = 'DELETE_ALL_CARTS_FAILED';
 
 /**
  * Get cart detail
@@ -110,5 +117,73 @@ export function updateCartSuccess(payload) {
 export function updateCartFailed() {
   return {
     type: UPDATE_CART_FAILED,
+  };
+}
+
+/**
+ * Delete cart
+ */
+ export function deleteCart(payload, onSuccess, onError) {
+  return {
+    type: DELETE_CART_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * Delete cart success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function deleteCartSuccess(payload) {
+  return {
+    type: DELETE_CART_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * Delete cart failed action
+ * @returns {object}
+ */
+export function deleteCartFailed() {
+  return {
+    type: DELETE_CART_FAILED,
+  };
+}
+
+/**
+ * Delete all cart
+ */
+ export function deleteAllCarts(payload, onSuccess, onError) {
+  return {
+    type: DELETE_ALL_CARTS_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * Delete all cart success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function deleteAllCartsSuccess(payload) {
+  return {
+    type: DELETE_ALL_CARTS_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * Delete all cart failed action
+ * @returns {object}
+ */
+export function deleteAllCartsFailed() {
+  return {
+    type: DELETE_ALL_CARTS_FAILED,
   };
 }

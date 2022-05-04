@@ -1,7 +1,5 @@
 import "./index.scss";
 import ProductInCart from "./ProductInCart";
-// import { productDeleteAll } from '../../features/productSelectedSlice'
-// import { deleteAllCart, getCart } from '../../features/productSelectedInformationSlice'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Bill from "./Bill";
@@ -10,7 +8,7 @@ import GreenTick from "../../assets/images/green-tick.jpg";
 import DeleteAllCartButton from "../Button/DeleteAllCartButton";
 import { Modal, Button, Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
-import { getCartDetail } from "../../stores/cart/cart.action";
+import { getCartDetail, deleteAllCarts } from "../../stores/cart/cart.action";
 
 function MainContent(props) {
   const { cartDetail, productList } = props;
@@ -52,7 +50,7 @@ function MainContent(props) {
           </Button>
         </div>
       ) : (
-        <Row container id="cart-container">
+        <Row id="cart-container">
           <Col span={8}>
             <Modal
               visible={openDialog}
@@ -78,13 +76,13 @@ function MainContent(props) {
                   </Link>
                   <DeleteAllCartButton setOpenDialog={setOpenDialog} />
                 </div>
-                {/* <ul id="product-list">
+                <ul id="product-list">
                       {
                         cartDetail.map((i, index) => {
-                          return <ProductInCart product={i} index={index} />
+                          return <ProductInCart cartItem={i} index={index} />
                         })
                       }
-                    </ul> */}
+                    </ul>
               </div>
             }
           </Col>
@@ -107,6 +105,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getCartDetail,
+  deleteAllCarts
 };
 
 export default withTranslation()(

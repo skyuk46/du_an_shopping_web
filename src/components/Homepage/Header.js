@@ -2,31 +2,29 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import userIcon from "../../assets/images/user-icon.png";
 import cartIcon from "../../assets/images/cart.png";
-import { useSelector, useDispatch, connect } from "react-redux";
-import { useState } from "react";
+import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 import SearchResultProduct from "./SearchResultProduct";
 import { withTranslation } from "react-i18next";
 import { SearchOutlined } from '@ant-design/icons';
 import "../../containers/home/home.scss";
 import { logout } from "../../stores/auth/auth.action";
 import { redirectRouter } from "../../utils/router";
+import { getCartDetail } from "../../stores/cart/cart.action";
 // import { getProductByWord } from "../../services/api/apiService";
 // import MenuBar from "./MenuBar";
 // import { getProductNumber } from "../../features/productSelectedSlice";
-import { Row, Col, Menu, Button, Input, Dropdown } from "antd";
+import { Row, Col, Menu, Input, Dropdown, Badge } from "antd";
 
 function Header(props) {
-  const dispatch = useDispatch();
-  // dispatch(
-  //     getProductNumber({
-  //         number: JSON.parse(window.localStorage.getItem("numberOfItem")),
-  //     })
-  // );
-  // var productSelected = useSelector((state) => state.productSelected.value);
-  // const username = useSelector((state) => state.userLogIn.username);
   const [searchResult, setSearchResult] = useState([]);
   const [displaySearchResult, setDisplaySearchResult] = useState("none");
-  const { t } = props;
+  const { t, cartDetail } = props;
+
+  useEffect(function () {
+    if (window.localStorage.getItem("token"))
+      props.getCartDetail(window.localStorage.getItem("token"));
+  }, []);
 
   const logOutMenu = (
     <Menu>
@@ -56,7 +54,7 @@ function Header(props) {
     },
     {
       icon: cartIcon,
-      content: "Giỏ hàng của bạn 0 sản phẩm",
+      content: `Giỏ hàng của bạn ${cartDetail ? cartDetail.length : 0} sản phẩm`,
       link: "/cart",
     },
   ];
@@ -143,7 +141,19 @@ function Header(props) {
                       <Dropdown overlay={logInMenu} placement="bottom" >
                         <img height="38" src={i.icon} alt="userIcon" />
                       </Dropdown>
-                    </div>) : (
+                    </div>) : (i.link === "/cart" && window.localStorage.getItem('userInfo')) ? (
+                      <Link
+                        to={i.link}
+                        id="content"
+                        style={{ textDecoration: "none", color: "white" }}
+                      >
+                        <Badge count={cartDetail ? cartDetail.length : 0}>
+                          <img height="38" src={i.icon} alt="userIcon" />
+                        </Badge>
+                        <span style={{ marginLeft: "10px" }}>{i.content}</span>
+                      </Link>
+
+                    ) : (
                     <Link
                       to={i.link}
                       id="content"
@@ -164,8 +174,9 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => ({
+  cartDetail: state.cart.cartDetail
 });
 
-const mapDispatchToProps = { logout };
+const mapDispatchToProps = { logout, getCartDetail };
 
 export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(Header));

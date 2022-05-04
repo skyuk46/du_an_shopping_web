@@ -4,7 +4,9 @@ function Header() {
 
   return (
     <div id="header-container">
-      <div id="header-title">Admin Shop</div>
+      <a href="/">
+        <div id="header-title">Admin Shop</div>
+      </a>
     </div>
   );
 }

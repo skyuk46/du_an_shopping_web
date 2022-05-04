@@ -11,10 +11,10 @@ function AddCategoryTemplate(props) {
 
   const layout = {
     labelCol: {
-      span: 4,
+      span: 6,
     },
     wrapperCol: {
-      span: 20,
+      span: 18,
     },
   };
   const [form] = Form.useForm();
@@ -26,9 +26,9 @@ function AddCategoryTemplate(props) {
       description: description,
       token: window.localStorage.getItem("token"),
     };
-    // props.createCategory(request, () => {
-    //   setOpenDialog(true)
-    // });
+    props.createCategory(request, () => {
+      setOpenDialog(true)
+    });
   };
 
   return (
@@ -54,7 +54,7 @@ function AddCategoryTemplate(props) {
           </div>
         )}
       </Modal>
-      <div id="title">Thêm loại hàng hóa</div>
+      <div id="title">Thêm loại sản phẩm</div>
       <Form
         {...layout}
         name="add-category-form"

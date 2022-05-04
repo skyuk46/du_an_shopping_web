@@ -11,7 +11,7 @@ import {
  * @returns {Promise}
  */
 const createCategoryApi = (params) => {
-  const uri = `/category/store/`;
+  const uri = `/category/store`;
   return api.post(uri, params);
 };
 

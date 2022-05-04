@@ -111,55 +111,6 @@ function EditCategoryTemplate(props) {
         </Modal>
       </div>
       <Table dataSource={dataSource} columns={columns}>
-        {/* <Fragment>
-              {isEdit && editingId === i.id ? (
-                <tr>
-                  <td>
-                    <Input
-                      placeholder={i.name}
-                      onChange={(e) => (name = e.target.value)}
-                      size="small"
-                      variant="outlined"
-                    />
-                  </td>
-                  <td>
-                    <Input
-                      placeholder={i.description}
-                      onChange={(e) => (description = e.target.value)}
-                      size="small"
-                      variant="outlined"
-                    />
-                  </td>
-                  <td>
-                    <Button
-                      onClick={() => {
-                        setIsEdit(false);
-                        setEditingId(-1);
-                      }}
-                    >
-                      Dừng sửa
-                    </Button>
-                  </td>
-                </tr>
-              ) : (
-                <tr>
-                  <td>{i.id}</td>
-                  <td>{i.name}</td>
-                  <td>{i.description}</td>
-                  <td>
-                    <Button
-                      onClick={() => {
-                        setIsEdit(true);
-                        setEditingId(i.id);
-                        setIsSave(false);
-                      }}
-                    >
-                      Sửa
-                    </Button>
-                  </td>
-                </tr>
-              )}
-            </Fragment> */}
       </Table>
     </div>
   );

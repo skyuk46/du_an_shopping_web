@@ -1,19 +1,17 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { api } from "../../services/api";
 import {
-  deleteProductSuccess,
-  deleteProductFailed,
-  DELETE_PRODUCT_START,
-} from "../../stores/product/product.action";
+  createOrderSuccess,
+  createOrderFailed,
+  CREATE_ORDER_START,
+} from "../../stores/order/order.action";
 /**
- * delete product
+ * create order
  * @param {any} params Params will be sent to server
  * @returns {Promise}
  */
-const deleteProductApi = (params) => {
-  const id = params.id;
-  delete params.id;
-  const uri = `/product/delete/${id}`;
+const createOrderApi = (params) => {
+  const uri = `/order/store`;
   return api.post(uri, params);
 };
 
@@ -21,13 +19,13 @@ const deleteProductApi = (params) => {
  * Handle get data request and response
  * @param {object} action
  */
-function* doDeleteProduct(action) {
+function* doCreateOrder(action) {
   try {
-    const response = yield call(deleteProductApi, action?.payload);
+    const response = yield call(createOrderApi, action?.payload);
     if (response?.data) {
       const { data } = response;
 
-      yield put(deleteProductSuccess(data));
+      yield put(createOrderSuccess(data));
 
       // Call callback action if provided
       if (action.onSuccess) {
@@ -37,7 +35,7 @@ function* doDeleteProduct(action) {
       throw new Error(response?.message);
     }
   } catch (error) {
-    yield put(deleteProductFailed());
+    yield put(createOrderFailed());
     // Call callback action if provided
     if (action.onError) {
       yield action.onError();
@@ -46,8 +44,8 @@ function* doDeleteProduct(action) {
 }
 
 /**
- * Watch delete product
+ * Watch create order
  */
-export default function* watchDeleteProduct() {
-  yield takeLatest(DELETE_PRODUCT_START, doDeleteProduct);
+export default function* watchCreateOrder() {
+  yield takeLatest(CREATE_ORDER_START, doCreateOrder);
 }
