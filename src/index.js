@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import AppContainer from './containers/app';
 import reportWebVitals from './reportWebVitals';
 import { I18nextProvider } from 'react-i18next';

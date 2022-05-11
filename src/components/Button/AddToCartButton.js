@@ -17,23 +17,34 @@ function AddToCartButton(props) {
     else {
       props.getCartDetail(window.localStorage.getItem("token"), () => {
         const { cartDetail } = props;
-        const productInCart = cartDetail.find(i => i.product.id === product.id)
+        const productInCart = cartDetail.find(
+          (i) => i.product.id === product.id
+        );
         if (!productInCart)
-          props.createCart({
-            token: window.localStorage.getItem("token"),
-            product_id: product.id,
-            amount: 1,
-            total_price: product.price
-          })
+          props.createCart(
+            {
+              token: window.localStorage.getItem("token"),
+              product_id: product.id,
+              amount: 1,
+              total_price: product.price,
+            },
+            () => {
+              props.getCartDetail(window.localStorage.getItem("token"));
+            }
+          );
         else
-          props.updateCart({
-            id: productInCart.id,
-            token: window.localStorage.getItem("token"),
-            product_id: product.id,
-            amount: 1,
-            total_price: product.price
-          })
-
+          props.updateCart(
+            {
+              id: productInCart.id,
+              token: window.localStorage.getItem("token"),
+              product_id: product.id,
+              amount,
+              total_price: product.price * amount,
+            },
+            () => {
+              props.getCartDetail(window.localStorage.getItem("token"));
+            }
+          );
       });
     }
   };
@@ -48,7 +59,7 @@ function AddToCartButton(props) {
       >
         <p>Bạn cần đăng nhập để thêm sản phẩm vào giỏ</p>
       </Modal>
-      {flexDirection == "column" ? (
+      {flexDirection === "column" ? (
         <Button onClick={AddToCart} block>
           Thêm vào giỏ
         </Button>

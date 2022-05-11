@@ -30,23 +30,24 @@
           padding: 0;
           li {
               width: 100%;
-              padding: 1vw;
+              padding: 1.5vw;
               display: flex;
               border-bottom: rgba($color: black, $alpha: 0.2) solid 1px;
               background-color: white;
               #name {
-                  width: 25%;
+                  width: 20%;
+                  font-size: 18px;
                   font-weight: bold;
                   @include vertical-center(center);
               }
               #price {
-                  width: 30%;
+                  width: 20%;
                   font-size: 20px;
                   font-weight: 500;
                   @include vertical-center(right);
               }
               #amount {
-                  width: 25%;
+                  width: 30%;
                   @include vertical-center(right);
                   #amount-number {
                       display: inline-block;
@@ -58,6 +59,9 @@
                       padding: 0;
                   }
               }
+              .delete-button {
+                margin: 35px;
+              }
           }
       }
       #delete-all-cart-button {
@@ -66,7 +70,7 @@
       #order-container {
           width: 80%;
           margin: 0 2vw;
-          padding: 1vw;
+          padding: 2vw 1vw;
           background-color: white;
           div, i{
               margin: 0.5vw 0;

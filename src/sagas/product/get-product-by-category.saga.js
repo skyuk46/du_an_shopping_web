@@ -1,6 +1,10 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { api } from '../../services/api';
-import { getProductByCategorySuccess, getProductByCategoryFailed, GET_PRODUCT_BY_CATEGORY_START } from '../../stores/product/product.action';
+import { call, put, takeLatest } from "redux-saga/effects";
+import { api } from "../../services/api";
+import {
+  getProductByCategorySuccess,
+  getProductByCategoryFailed,
+  GET_PRODUCT_BY_CATEGORY_START,
+} from "../../stores/product/product.action";
 /**
  * get product by category
  * @param {any} params Params will be sent to server

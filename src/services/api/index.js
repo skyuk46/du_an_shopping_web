@@ -3,9 +3,6 @@ import axios from 'axios';
 import { NOTIFICATION_TYPE } from '../../common/constant';
 import i18n from "../../common/i18n"
 import addNotification from '../../common/toast';
-import history from "../../services/history"
-import store from "../../stores"
-import { logout } from '../../stores/auth/auth.action';
 import { validateStatus } from '../../utils/api';
 
 // common base instance
@@ -81,27 +78,15 @@ instance.interceptors.response.use(
             );
             response.config._isRefreshBefore = true;
             return instance(response.config);
-          } else {
-            startLogout();
           }
         })
         .catch(() => {
-          startLogout();
         });
-    } else if (response.status === 401) {
-      startLogout();
     } else {
       return Promise.reject(error);
     }
   },
 );
-
-const startLogout = () => {
-  if (history.location.pathname !== '/login') {
-    const callbackUrl = history.location.pathname;
-    store.dispatch(logout(callbackUrl));
-  }
-};
 
 const api = {
   instance,

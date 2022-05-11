@@ -45,6 +45,15 @@
           }
       }
   }
+  .comment-container {
+    padding: 10px;
+    .comment {
+      border: 1px solid rgba($color: grey, $alpha: 0.3);
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+    }
+  }
   .parameters {
       width: 30%;
       .parameter {

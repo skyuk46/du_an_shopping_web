@@ -4,18 +4,14 @@ import { Modal } from "antd";
 import { withTranslation } from "react-i18next";
 
 function Bill(props) {
-  const { productList, setOrderComplete, deleteAllCart, t } = props;
+  const { cartDetail, setOrderComplete, t } = props;
   const [loggedIn, setLoggedIn] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
 
   var totalPriceWithOutDeliverFee = 0;
-  var quantityList = [];
-  var idList = [];
-  // for (let i = 0; i < productList.length; i++) {
-  //   totalPriceWithOutDeliverFee += productList[i].price * productList[i].amount;
-  //   quantityList.push(productList[i].amount);
-  //   idList.push(productList[i].id)
-  // }
+  cartDetail.forEach(detail => {
+    totalPriceWithOutDeliverFee += +detail.total_price
+  })
 
   var totalPrice = totalPriceWithOutDeliverFee + 28000;
 
@@ -48,7 +44,7 @@ function Bill(props) {
         <div>Phí vận chuyển: <span>28000đ</span></div>
         <div>Thành tiền: <span>{totalPrice}đ</span></div>
         <div><i>(Đã bao gồm VAT)</i></div>
-        <OrderButton setOrderComplete={setOrderComplete} setOpenDialog={setOpenDialog} setLoggedIn={setLoggedIn} deleteAllCart={deleteAllCart} idList={idList} quantityList={quantityList} />
+        <OrderButton setOrderComplete={setOrderComplete} setOpenDialog={setOpenDialog} setLoggedIn={setLoggedIn} cartDetail={cartDetail} />
       </div>
     </>
   );

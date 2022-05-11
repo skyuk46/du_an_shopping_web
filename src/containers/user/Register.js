@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
 import { Input, Button, Form } from "antd";
+import { register } from "../../stores/auth/auth.action";
 import logo from "../../assets/images/logo.png";
 import "./user.scss";
+import { redirectRouter } from "../../utils/router";
 
 const layout = {
   labelCol: {
@@ -16,15 +19,30 @@ const layout = {
 
 function Register(props) {
   const [form] = Form.useForm();
-  const { t } = props;
-  useEffect(function () {
-    document.title = t("user.register");
-  }, []);
+  const { t, message } = props;
+  useEffect(
+    function () {
+      document.title = t("user.register");
+    },
+    [t]
+  );
 
   const [registered, setRegistered] = useState(false);
 
   const onFinish = (values) => {
-    console.log(values);
+    const { username, password, surname, name, phoneNumber, address } = values;
+    const params = {
+      email: username,
+      password,
+      first_name: surname,
+      last_name: name,
+      phone: phoneNumber,
+      address,
+    };
+
+    props.register(params, () => {
+      setRegistered(true);
+    });
   };
 
   return (
@@ -36,19 +54,27 @@ function Register(props) {
         {registered ? (
           <div>
             <div
-              style={{ fontSize: "24px", color: "#69f0ae", marginBottom: "15px" }}
+              style={{
+                fontSize: "24px",
+                color: "#69f0ae",
+                marginBottom: "15px",
+              }}
             >
-              {t('user.registerSuccessfully')}
+              {t("user.registerSuccessfully")}
             </div>
             <Link style={{ textDecoration: "none" }} to="/">
-              <Button variant="contained" color="primary">
-                {t('user.backToHome')}
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => redirectRouter("/")}
+              >
+                {t("user.backToHome")}
               </Button>
             </Link>
           </div>
         ) : (
           <>
-            <div className="title">{t('user.createAccount')}</div>
+            <div className="title">{t("user.createAccount")}</div>
             <Form
               {...layout}
               name="register-form"
@@ -66,9 +92,7 @@ function Register(props) {
                   },
                 ]}
               >
-                <Input
-                  fullWidth
-                />
+                <Input />
               </Form.Item>
               <Form.Item
                 name="password"
@@ -80,10 +104,7 @@ function Register(props) {
                   },
                 ]}
               >
-                <Input
-                  fullWidth
-                  type="password"
-                />
+                <Input type="password" />
               </Form.Item>
               <Form.Item
                 name="surname"
@@ -95,9 +116,7 @@ function Register(props) {
                   },
                 ]}
               >
-                <Input
-                  fullWidth
-                />
+                <Input />
               </Form.Item>
               <Form.Item
                 name="name"
@@ -109,9 +128,7 @@ function Register(props) {
                   },
                 ]}
               >
-                <Input
-                  fullWidth
-                />
+                <Input />
               </Form.Item>
               <Form.Item
                 name="phoneNumber"
@@ -123,9 +140,7 @@ function Register(props) {
                   },
                 ]}
               >
-                <Input
-                  fullWidth
-                />
+                <Input />
               </Form.Item>
               <Form.Item
                 name="address"
@@ -137,21 +152,22 @@ function Register(props) {
                   },
                 ]}
               >
-                <Input
-                  fullWidth
-                />
+                <Input />
               </Form.Item>
               <Button
                 className="submit_button"
                 type="primary"
                 htmlType="submit"
               >
-                {t('user.register')}
+                {t("user.register")}
               </Button>
             </Form>
+            <center className="error-message">
+              {message !== "" && message}
+            </center>
             <br />
             <div className="footer_tip">
-              <Link to="/login">{t('user.haveAccount')}</Link>
+              <Link to="/login">{t("user.haveAccount")}</Link>
             </div>
           </>
         )}
@@ -160,4 +176,14 @@ function Register(props) {
   );
 }
 
-export default withTranslation()(Register);
+const mapStateToProps = (state) => ({
+  message: state.auth.message,
+});
+
+const mapDispatchToProps = {
+  register,
+};
+
+export default withTranslation()(
+  connect(mapStateToProps, mapDispatchToProps)(Register)
+);

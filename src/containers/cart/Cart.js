@@ -12,7 +12,7 @@ function Cart(props) {
     function () {
       document.title = t('cart.title')
     }
-    , []);
+  );
 
   return (
     <div id="cart">

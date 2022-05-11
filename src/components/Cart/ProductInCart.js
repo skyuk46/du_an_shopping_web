@@ -1,72 +1,87 @@
-import './index.scss'
-import { updateCart, deleteCart } from '../../stores/cart/cart.action';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { Button } from 'antd'
+import "./index.scss";
+import { updateCart, deleteCart } from "../../stores/cart/cart.action";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { Button } from "antd";
+import { useState } from "react";
 
 function ProductInCart(props) {
-  const { cartItem, index } = props;
-  const price = cartItem.product.price * cartItem.amount
+  const { index, cartDetail, refreshData } = props;
+  let [amount, setAmount] = useState(cartDetail[index].amount);
+  const price = cartDetail[index].product.price * amount;
 
-  const UpdateCart = (amount) => {
-    // dispatch(updateCart(
-    //     {
-    //         "index": index,
-    //         "amount": amount,
-    //     }
-    // ));
-  }
+  const UpdateCart = () => {
+    props.updateCart(
+      {
+        id: cartDetail[index].id,
+        token: window.localStorage.getItem("token"),
+        amount,
+        total_price: cartDetail[index].product.price * amount,
+      },
+      () => {
+        refreshData();
+      }
+    );
+  };
 
   const DeleteCart = () => {
-    // dispatch(productDecrement());
-    // dispatch(deleteCart(
-    //     {
-    //         "index": index,
-    //     }
-    // ));
-    let cart = JSON.parse(window.localStorage.getItem("cart"));
-    cart.splice(index, 1);
-    window.localStorage.setItem("numberOfItem", JSON.stringify(parseInt(JSON.parse(window.localStorage.getItem("numberOfItem"))) - 1))
-    window.localStorage.setItem("cart", JSON.stringify(cart));
-  }
+    props.deleteCart(
+      { id: cartDetail[index].id, token: window.localStorage.getItem("token") },
+      () => {
+        props.getCartDetail({ token: window.localStorage.getItem("token") });
+      }
+    );
+  };
 
   const amountMinus = () => {
-    // let amount = productAmount - 1;
-    // if (amount > 0)
-    //   UpdateCart(amount);
-  }
+    setAmount(amount--);
+    UpdateCart();
+  };
 
   const amountPlus = () => {
-    // let amount = productAmount + 1;
-    // UpdateCart(amount);
-  }
+    setAmount(amount++);
+    UpdateCart();
+  };
 
   return (
     <li>
-      <img src={cartItem.product.image[0].link} width="50" height="50" alt="img" />
+      <img
+        src={cartDetail[index].product.image[0].link}
+        width="120"
+        height="90"
+        alt="img"
+      />
       <div id="name">
-        <div>{cartItem.product.name}</div>
+        <div>{cartDetail[index].product.name}</div>
+        <div>Loại: {cartDetail[index].product.category.name}</div>
         <br />
-        <Button onClick={DeleteCart} style={{ fontSize: "12px" }} color="secondary">Xóa mặt hàng</Button>
       </div>
       <div id="price">{price}đ</div>
       <div id="amount">
         <div>
-          <Button onClick={amountMinus} variant="contained">-</Button>
-          {/* <div id="amount-number">{productAmount}</div> */}
-          <Button onClick={amountPlus} variant="contained">+</Button>
+          <Button onClick={amountMinus}>-</Button>
+          <div id="amount-number">{amount}</div>
+          <Button onClick={amountPlus}>+</Button>
         </div>
+      </div>
+      <div className="delete-button">
+        <Button
+          onClick={DeleteCart}
+          style={{ fontSize: "12px" }}
+          color="secondary"
+        >
+          Xóa mặt hàng
+        </Button>
       </div>
     </li>
   );
 }
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
   updateCart,
-  deleteCart
+  deleteCart,
 };
 
 export default withTranslation()(

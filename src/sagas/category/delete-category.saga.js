@@ -22,7 +22,7 @@ const deleteCategoryApi = (params) => {
 function* doDeleteCategory(action) {
   try {
     const response = yield call(deleteCategoryApi, action?.payload);
-    if (response?.data) {
+    if (response?.status) {
       const { data } = response;
 
       yield put(deleteCategorySuccess(data));

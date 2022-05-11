@@ -6,20 +6,18 @@ import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import SearchResultProduct from "./SearchResultProduct";
 import { withTranslation } from "react-i18next";
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from "@ant-design/icons";
 import "../../containers/home/home.scss";
 import { logout } from "../../stores/auth/auth.action";
 import { redirectRouter } from "../../utils/router";
 import { getCartDetail } from "../../stores/cart/cart.action";
-// import { getProductByWord } from "../../services/api/apiService";
+import { searchProductsByName } from "../../stores/product/product.action";
 // import MenuBar from "./MenuBar";
-// import { getProductNumber } from "../../features/productSelectedSlice";
 import { Row, Col, Menu, Input, Dropdown, Badge } from "antd";
 
 function Header(props) {
-  const [searchResult, setSearchResult] = useState([]);
   const [displaySearchResult, setDisplaySearchResult] = useState("none");
-  const { t, cartDetail } = props;
+  const { t, cartDetail, searchProductList } = props;
 
   useEffect(function () {
     if (window.localStorage.getItem("token"))
@@ -29,9 +27,7 @@ function Header(props) {
   const logOutMenu = (
     <Menu>
       <Menu.Item>
-        <a onClick={() => LogOut()}>
-          {t('user.logout')}
-        </a>
+        <a onClick={() => LogOut()}>{t("user.logout")}</a>
       </Menu.Item>
     </Menu>
   );
@@ -39,9 +35,7 @@ function Header(props) {
   const logInMenu = (
     <Menu>
       <Menu.Item>
-        <a onClick={() => redirectRouter('/login')}>
-          {t('user.login')}
-        </a>
+        <a onClick={() => redirectRouter("/login")}>{t("user.login")}</a>
       </Menu.Item>
     </Menu>
   );
@@ -54,7 +48,8 @@ function Header(props) {
     },
     {
       icon: cartIcon,
-      content: `Giỏ hàng của bạn ${cartDetail ? cartDetail.length : 0} sản phẩm`,
+      content: `Giỏ hàng của bạn ${cartDetail ? cartDetail.length : 0
+        } sản phẩm`,
       link: "/cart",
     },
   ];
@@ -62,47 +57,45 @@ function Header(props) {
   const SearchProduct = async (e) => {
     if (e.target.value === "") setDisplaySearchResult("none");
     else {
-      // let res = await getProductByWord(e.target.value);
-      // setSearchResult(res.data.data);
-      // setDisplaySearchResult("");
+      props.searchProductsByName({ search_name: e.target.value }, () => {
+        setDisplaySearchResult('block')
+      });
     }
   };
 
   const LogOut = () => {
-    props.logout({ token: window.localStorage.getItem('token') })
+    props.logout({ token: window.localStorage.getItem("token") });
   };
 
   return (
     <>
       <div id="header-container">
-        <Row style={{ height: 'inherit' }}>
+        <Row style={{ height: "inherit" }}>
           <Col span={4}>
             <Link to="/">
-              <img
-                id="logo"
-                src={logo}
-                alt="logo"
-              />
+              <img id="logo" src={logo} alt="logo" />
             </Link>
           </Col>
-          <Col span={8} style={{ display: 'table' }}>
+          <Col span={8} style={{ display: "table" }}>
             <div id="search-bar">
               <Input
-                placeholder={t('common.searchPlaceholder')}
+                placeholder={t("common.searchPlaceholder")}
                 onChange={SearchProduct}
                 prefix={<SearchOutlined />}
-                style={{ borderRadius: '10px' }}
+                style={{ borderRadius: "10px" }}
                 size={"large"}
               />
               <div
                 style={{
                   position: "absolute",
-                  top: "38px",
-                  zIndex: "1",
+                  top: "75px",
+                  zIndex: "100",
                   display: displaySearchResult,
                   border: "solid 1px black",
                   backgroundColor: "white",
                   width: "100%",
+                  height: '350px',
+                  overflowY: 'auto'
                 }}
               >
                 <div
@@ -115,11 +108,12 @@ function Header(props) {
                 >
                   Sản phẩm gợi ý
                 </div>
-                {searchResult.map((i) => {
+                {searchProductList.map((i) => {
                   return (
                     <SearchResultProduct
                       setDisplaySearchResult={setDisplaySearchResult}
                       product={i}
+                      key={i.id}
                     />
                   );
                 })}
@@ -130,36 +124,40 @@ function Header(props) {
             {iconList.map((i) => {
               return (
                 <>
-                  {i.link === "/login" && window.localStorage.getItem('userInfo') ? (
+                  {i.link === "/login" &&
+                    window.localStorage.getItem("userInfo") ? (
                     <div className="icon">
-                      <Dropdown overlay={logOutMenu} placement="bottom" >
+                      <Dropdown overlay={logOutMenu} placement="bottom">
                         <img height="38" src={i.icon} alt="userIcon" />
                       </Dropdown>
                     </div>
-                  ) : (i.link === "/login" && !window.localStorage.getItem('userInfo')) ? (
+                  ) : i.link === "/login" &&
+                    !window.localStorage.getItem("userInfo") ? (
                     <div className="icon">
-                      <Dropdown overlay={logInMenu} placement="bottom" >
+                      <Dropdown overlay={logInMenu} placement="bottom">
                         <img height="38" src={i.icon} alt="userIcon" />
                       </Dropdown>
-                    </div>) : (i.link === "/cart" && window.localStorage.getItem('userInfo')) ? (
-                      <Link
-                        to={i.link}
-                        id="content"
-                        style={{ textDecoration: "none", color: "white" }}
-                      >
-                        <Badge count={cartDetail ? cartDetail.length : 0}>
-                          <img height="38" src={i.icon} alt="userIcon" />
-                        </Badge>
-                        <span style={{ marginLeft: "10px" }}>{i.content}</span>
-                      </Link>
-
-                    ) : (
+                    </div>
+                  ) : i.link === "/cart" &&
+                    window.localStorage.getItem("userInfo") ? (
                     <Link
                       to={i.link}
                       id="content"
                       style={{ textDecoration: "none", color: "white" }}
                     >
-                      <img height="38" src={i.icon} alt="userIcon" /> {i.content}
+                      <Badge count={cartDetail ? cartDetail.length : 0}>
+                        <img height="38" src={i.icon} alt="userIcon" />
+                      </Badge>
+                      <span style={{ marginLeft: "10px" }}>{i.content}</span>
+                    </Link>
+                  ) : (
+                    <Link
+                      to={i.link}
+                      id="content"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      <img height="38" src={i.icon} alt="userIcon" />{" "}
+                      {i.content}
                     </Link>
                   )}
                 </>
@@ -174,9 +172,12 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => ({
-  cartDetail: state.cart.cartDetail
+  cartDetail: state.cart.cartDetail,
+  searchProductList: state.product.searchProductList,
 });
 
-const mapDispatchToProps = { logout, getCartDetail };
+const mapDispatchToProps = { logout, getCartDetail, searchProductsByName };
 
-export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default withTranslation()(
+  connect(mapStateToProps, mapDispatchToProps)(Header)
+);

@@ -22,7 +22,7 @@ const deleteOrderApi = (params) => {
 function* doDeleteOrder(action) {
   try {
     const response = yield call(deleteOrderApi, action?.payload);
-    if (response?.data) {
+    if (response?.status) {
       const { data } = response;
 
       yield put(deleteOrderSuccess(data));

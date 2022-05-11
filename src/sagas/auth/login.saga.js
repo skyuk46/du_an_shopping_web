@@ -22,7 +22,7 @@ const loginApi = (params) => {
 function* doLogin(action) {
   try {
     const response = yield call(loginApi, action?.payload);
-    if (response?.status) {
+    if (response?.data.status) {
       const { data, token } = response;
 
       // Save token to local storage
@@ -38,11 +38,10 @@ function* doLogin(action) {
         yield action.onSuccess();
       }
     } else {
-      throw new Error(response?.message);
+      throw new Error(response?.data?.message);
     }
   } catch (error) {
-    console.log(error)
-    yield put(loginFailed(error));
+    yield put(loginFailed(error?.message));
     // Call callback action if provided
     if (action.onError) {
       yield action.onError();

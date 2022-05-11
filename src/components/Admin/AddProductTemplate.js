@@ -44,18 +44,23 @@ function AddProductTemplate(props) {
     params.append("description", description);
     params.append("discount_price", 0);
     params.append("token", window.localStorage.getItem("token"));
-    params.append("product_file_main", mainImage.fileList[0].thumbUrl);
-    params.append(
-      "product_file_secondary",
-      secondImage.fileList.map((file) => file.thumbUrl)
-    );
+    params.append("product_file_main", mainImage.fileList[0].originFileObj);
+
+    secondImage.fileList.forEach((file) => {
+      params.append(
+        "product_file_secondary[]",
+        file.originFileObj
+      );
+    })
+
 
     try {
       props.createProduct(params);
       setIsAdded(true);
+      form.resetFields();
     } catch (e) {
       setIsAddFailed(true);
-      form.current.resetFields();
+      form.resetFields();
     }
   };
 

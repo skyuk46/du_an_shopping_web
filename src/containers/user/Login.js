@@ -18,12 +18,16 @@ const layout = {
 };
 
 function Login(props) {
-  useEffect(function () {
-    document.title = t("user.login");
-  }, []);
-
   const [form] = Form.useForm();
   const { t, message } = props;
+  
+  useEffect(
+    function () {
+      document.title = t("user.login");
+    },
+    [t]
+  );
+
 
   const onFinish = (values) => {
     const { email, password } = values;
@@ -76,15 +80,11 @@ function Login(props) {
           >
             <Input type="password" />
           </Form.Item>
-          <Button
-            className="submit_button"
-            type="primary"
-            htmlType="submit"
-          >
+          <Button className="submit_button" type="primary" htmlType="submit">
             {t("user.login")}
           </Button>
         </Form>
-        <center class="error-message">{message !== '' && message}</center>
+        <center className="error-message">{message !== "" && message}</center>
         <br />
         <div className="footer_tip">
           <Link to="/register">{t("user.dontHaveAccount")}</Link>
@@ -95,7 +95,7 @@ function Login(props) {
 }
 
 const mapStateToProps = (state) => ({
-  message: state.auth.message
+  message: state.auth.message,
 });
 
 const mapDispatchToProps = { login };

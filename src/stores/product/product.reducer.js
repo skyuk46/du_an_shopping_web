@@ -16,13 +16,17 @@ import {
   UPDATE_PRODUCT_FAILED,
   DELETE_PRODUCT_START,
   DELETE_PRODUCT_SUCCESS,
-  DELETE_PRODUCT_FAILED
+  DELETE_PRODUCT_FAILED,
+  SEARCH_PRODUCT_BY_NAME_START,
+  SEARCH_PRODUCT_BY_NAME_SUCCESS,
+  SEARCH_PRODUCT_BY_NAME_FAILED,
 } from "./product.action";
 
 const initialState = {
   isLoading: false,
   productList: [],
   productDetail: {},
+  searchProductList: [],
   success: false,
 };
 
@@ -40,6 +44,7 @@ export default function product(state = initialState, action) {
     case CREATE_PRODUCT_START:
     case UPDATE_PRODUCT_START:
     case DELETE_PRODUCT_START:
+    case SEARCH_PRODUCT_BY_NAME_START:
       return {
         ...state,
         isLoading: true,
@@ -86,6 +91,18 @@ export default function product(state = initialState, action) {
         ...state,
         success: false,
         isLoading: false,
+      }
+    case SEARCH_PRODUCT_BY_NAME_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        searchProductList: action.payload
+      }
+    case SEARCH_PRODUCT_BY_NAME_FAILED:
+      return {
+        ...state,
+        success: true,
+        searchProductList: []
       }
     default:
       return state;

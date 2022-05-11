@@ -1,9 +1,14 @@
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+
 export const LOGOUT_START = 'LOGOUT_START';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+
+export const REGISTER_START = 'REGISTER_START'
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+export const REGISTER_FAILED = 'REGISTER_FAILED'
 
 /**
  * Login
@@ -79,5 +84,37 @@ export function logoutSuccess(payload) {
 export function logoutFailed() {
   return {
     type: LOGOUT_FAILED,
+  };
+}
+
+export function register(payload, onSuccess, onError) {
+  return {
+    type: REGISTER_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * Register success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function registerSuccess(payload) {
+  return {
+    type: REGISTER_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * Register failed action
+ * @returns {object}
+ */
+export function registerFailed(payload) {
+  return {
+    type: REGISTER_FAILED,
+    payload: payload
   };
 }

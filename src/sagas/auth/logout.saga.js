@@ -5,6 +5,7 @@ import {
   logoutSuccess,
   LOGOUT_START,
 } from '../../stores/auth/auth.action';
+import { redirectRouter } from '../../utils/router';
 
 /**
  * Handle get data request and response
@@ -29,6 +30,10 @@ function* doLogout(action) {
 
     if (response?.status) {
       yield put(logoutSuccess());
+      const callbackUrl = action?.callbackUrl;
+  
+      // Redirect to home
+      callbackUrl && redirectRouter('/login');  
     } else {
       throw new Error(response?.message);
     }

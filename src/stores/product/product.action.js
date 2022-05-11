@@ -22,6 +22,10 @@ export const DELETE_PRODUCT_START = 'DELETE_PRODUCT_START';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_PRODUCT_FAILED = 'DELETE_PRODUCT_FAILED';
 
+export const SEARCH_PRODUCT_BY_NAME_START = 'SEARCH_PRODUCT_BY_NAME_START';
+export const SEARCH_PRODUCT_BY_NAME_SUCCESS = 'SEARCH_PRODUCT_BY_NAME_SUCCESS';
+export const SEARCH_PRODUCT_BY_NAME_FAILED = 'SEARCH_PRODUCT_BY_NAME_FAILED';
+
 /**
  * Search product
  */
@@ -223,5 +227,39 @@ export function deleteProductSuccess(payload) {
 export function deleteProductFailed() {
   return {
     type: DELETE_PRODUCT_FAILED,
+  };
+}
+
+/**
+ * search product
+ */
+ export function searchProductsByName(payload, onSuccess, onError) {
+  return {
+    type: SEARCH_PRODUCT_BY_NAME_START,
+    payload: payload,
+    onSuccess: onSuccess,
+    onError: onError,
+  };
+}
+
+/**
+ * search product success action
+ * @param {*} payload
+ * @returns {object}
+ */
+export function searchProductsByNameSuccess(payload) {
+  return {
+    type: SEARCH_PRODUCT_BY_NAME_SUCCESS,
+    payload: payload,
+  };
+}
+
+/**
+ * search product failed action
+ * @returns {object}
+ */
+export function searchProductsByNameFailed() {
+  return {
+    type: SEARCH_PRODUCT_BY_NAME_FAILED,
   };
 }

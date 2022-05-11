@@ -18,13 +18,19 @@ function MainContent(props) {
   useEffect(function () {
     if (window.localStorage.getItem("token"))
       props.getCartDetail(window.localStorage.getItem("token"));
-  }, []);
+  }, [props]);
 
   const DeleteAllCart = () => {
-    // dispatch(deleteAllCart());
-    // dispatch(productDeleteAll());
-    window.localStorage.removeItem("cart");
-    window.localStorage.removeItem("numberOfItem");
+    props.deleteAllCarts(
+      { token: window.localStorage.getItem("token") },
+      () => {
+        refreshData();
+      }
+    );
+  };
+
+  const refreshData = () => {
+    props.getCartDetail({ token: window.localStorage.getItem("token") });
   };
 
   const closeDialog = () => {
@@ -51,10 +57,10 @@ function MainContent(props) {
         </div>
       ) : (
         <Row id="cart-container">
-          <Col span={8}>
+          <Col span={16}>
             <Modal
               visible={openDialog}
-              onClose={closeDialog}
+              onCancel={closeDialog}
               title="Xác nhận xóa giỏ hàng"
               onOk={DeleteAllCart}
               okText="Có"
@@ -76,22 +82,25 @@ function MainContent(props) {
                   </Link>
                   <DeleteAllCartButton setOpenDialog={setOpenDialog} />
                 </div>
+                <br />
                 <ul id="product-list">
-                      {
-                        cartDetail.map((i, index) => {
-                          return <ProductInCart cartItem={i} index={index} />
-                        })
-                      }
-                    </ul>
+                  {cartDetail.map((i, index) => {
+                    return (
+                      <ProductInCart
+                        getCartDetail={props.getCartDetail}
+                        index={index}
+                        key={i.amount}
+                        cartDetail={cartDetail}
+                        refreshData={refreshData}
+                      />
+                    );
+                  })}
+                </ul>
               </div>
             }
           </Col>
           <Col span={8}>
-            <Bill
-              productList={productList}
-              setOrderComplete={setOrderComplete}
-              deleteAllCart={DeleteAllCart}
-            />
+            <Bill cartDetail={cartDetail} setOrderComplete={setOrderComplete} />
           </Col>
         </Row>
       )}
@@ -105,7 +114,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getCartDetail,
-  deleteAllCarts
+  deleteAllCarts,
 };
 
 export default withTranslation()(

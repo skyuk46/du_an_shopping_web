@@ -1,17 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { api } from '../../services/api';
 import {
-  deleteAllCartsSuccess,
-  deleteAllCartsFailed,
-  DELETE_ALL_CARTS_START
-} from '../../stores/cart/cart.action';
+  registerSuccess,
+  registerFailed,
+  REGISTER_START
+} from '../../stores/auth/auth.action';
 /**
- * Delete all cart
+ * Register
  * @param {any} params Params will be sent to server
  * @returns {Promise}
  */
-const deleteAllCartsApi = (params) => {
-  const uri = `/card/delete/all/user`;
+const registerApi = (params) => {
+  const uri = `/register`;
   return api.post(uri, params);
 };
 
@@ -19,13 +19,13 @@ const deleteAllCartsApi = (params) => {
  * Handle get data request and response
  * @param {object} action
  */
-function* doDeleteAllCarts(action) {
+function* doRegister(action) {
   try {
-    const response = yield call(deleteAllCartsApi, action?.payload);
+    const response = yield call(registerApi, action?.payload);
     if (response?.status) {
       const { data } = response;
 
-      yield put(deleteAllCartsSuccess(data));
+      yield put(registerSuccess(data));
 
       // Call callback action if provided
       if (action.onSuccess) {
@@ -35,7 +35,7 @@ function* doDeleteAllCarts(action) {
       throw new Error(response?.message);
     }
   } catch (error) {
-    yield put(deleteAllCartsFailed());
+    yield put(registerFailed());
     // Call callback action if provided
     if (action.onError) {
       yield action.onError();
@@ -44,8 +44,8 @@ function* doDeleteAllCarts(action) {
 }
 
 /**
- * Watch delete all cart
+ * Watch create cart
  */
-export default function* watchDeleteAllCarts() {
-  yield takeLatest(DELETE_ALL_CARTS_START, doDeleteAllCarts);
+export default function* watchRegister() {
+  yield takeLatest(REGISTER_START, doRegister);
 }
