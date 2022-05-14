@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import 'antd/dist/antd.min.css';
 import AppContainer from './containers/app';
 import reportWebVitals from './reportWebVitals';

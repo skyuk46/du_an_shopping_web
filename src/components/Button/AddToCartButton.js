@@ -60,11 +60,11 @@ function AddToCartButton(props) {
         <p>Bạn cần đăng nhập để thêm sản phẩm vào giỏ</p>
       </Modal>
       {flexDirection === "column" ? (
-        <Button onClick={AddToCart} block>
+        <Button onClick={AddToCart} className="shop-button" block>
           Thêm vào giỏ
         </Button>
       ) : (
-        <Button onClick={AddToCart} block>
+        <Button onClick={AddToCart} className="shop-button" block>
           Thêm vào giỏ
         </Button>
       )}

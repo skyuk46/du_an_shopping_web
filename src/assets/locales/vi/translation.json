@@ -58,8 +58,17 @@
     "status": "Trạng thái",
     "product": "Sản phẩm"
   },
+  "category": {
+    "product": "Sản phẩm theo loại"
+  },
   "cart": {
     "title": "Giỏ hàng"
+  },
+  "review": {
+    "user": "Người đánh giá",
+    "product": "Sản phẩm đánh giá",
+    "content": "Nội dung",
+    "rate": "Đánh giá"
   },
   "form": {
     "required": "Mục này bắt buộc nhập"

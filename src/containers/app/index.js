@@ -7,6 +7,7 @@ import Register from '../user/Register'
 import Cart from '../cart/Cart';
 import ProductDetail from '../product/ProductDetail'
 import Admin from '../admin/Admin'
+import Category from '../category/Category'
 
 /**
  *
@@ -23,6 +24,7 @@ export default function AppContainer() {
           <Route path="/cart" component={Cart} />
           <Route path="/product/:id" component={ProductDetail} />
           <Route path="/admin" component={Admin} />
+          <Route path="/category/:id" component={Category} />
         </Switch>
       </Router>
     </div>

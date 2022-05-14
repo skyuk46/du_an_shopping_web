@@ -23,6 +23,8 @@ function Table(props) {
     setEditCategoryTemplate,
     viewOrderTemplate,
     setViewOrderTemplate,
+    viewReviewTemplate,
+    setViewReviewTemplate
   } = props;
 
   const AddTemplate = () => {
@@ -43,11 +45,7 @@ function Table(props) {
         setViewProductTemplate(false);
       }
     else if (name === "Order") {
-      if (viewOrderTemplate === false) {
-        setViewOrderTemplate(true);
-      } else {
-        setViewOrderTemplate(false);
-      }
+      setViewOrderTemplate(!viewOrderTemplate);
     } else if (name === "Category") {
       if (viewCategoryTemplate === false) {
         setViewCategoryTemplate(true);
@@ -56,6 +54,8 @@ function Table(props) {
         setViewCategoryTemplate(false);
       }
     }
+    else if (name === "Review")
+      setViewReviewTemplate(!viewReviewTemplate)
   };
 
   const EditTemplate = async () => {
@@ -81,7 +81,7 @@ function Table(props) {
     <div class="table-container">
       <b>{name}</b>
       <span>
-        {name === "Order" || name === "Customer" ? (
+        {name === "Order" || name === "Review" ? (
           <Button
             className="float_right"
             icon={<PlusOutlined />}
@@ -110,7 +110,7 @@ function Table(props) {
         </Button>
       </span>
       <span>
-        {name === "Order" ? (
+        {name === "Order" || name === "Review" ? (
           <Button
             className="float_right"
             disabled

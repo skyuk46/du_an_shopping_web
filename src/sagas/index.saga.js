@@ -31,6 +31,8 @@ import watchDeleteOrder from './order/delete-order.saga';
 // review
 import watchCreateReview from './review/create-review.saga';
 import watchGetReviewByProductId from './review/get-review-by-product.saga';
+import watchSearchReview from './review/search-review.saga';
+import watchDeleteReview from './review/delete-review.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -65,5 +67,7 @@ export default function* rootSaga() {
     // review
     watchCreateReview(),
     watchGetReviewByProductId(),
+    watchSearchReview(),
+    watchDeleteReview(),
   ])
 }

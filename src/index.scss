@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.shop-button {
+  background-color: rgb(245, 172, 37) !important;
+  color: white !important;
+}
+
+.ant-list-item:hover {
+  cursor: pointer;
+}

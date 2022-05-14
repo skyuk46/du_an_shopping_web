@@ -1,62 +1,79 @@
-import { useState, useEffect } from "react"
-// import {categoryNavigation} from '../../services/navigation/categoryNavigationService'
-import { useHistory } from "react-router-dom"
-import { Button, Row, Col, Divider, Drawer, List, Typography } from "antd"
+import { useState } from "react";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { Button, Row, Drawer, List } from "antd";
+import { ShopOutlined } from "@ant-design/icons";
+import { redirectRouter } from "../../utils/router";
 
-function MenuBar() {
+function MenuBar(props) {
+  const { categoryList } = props;
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [categoriesList, setCategoriesList] = useState([]);
-  const history = useHistory();
-
-  useEffect(
-    async function () {
-      setCategoriesList((await getAllCategories()).data.data);
-    }
-    , []);
-
 
   const toggleDrawer = (isOpen) => {
     setOpenDrawer(isOpen);
-  }
+  };
+
+  const redirectToCategoryProduct = (category) => {
+    redirectRouter(`/category/${category.id}`);
+  };
 
   const list = () => (
     <div
       role="presentation"
-      onClick={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
     >
       <List>
-        {
-          categoriesList.map((i) => (
-            <>
-              <List.Item onClick={() => categoryNavigation(i.id, history)} button key={i.name}>
-                <List.Item.Meta avatar={<FastfoodIcon />} />
-                <Typography primary={i.name} />
-              </List.Item>
-              <Divider />
-            </>
-          ))
-        }
+        {categoryList.map((i) => (
+          <>
+            <List.Item key={i.id}>
+              <div
+                onClick={() => redirectToCategoryProduct(i)}
+                style={{ fontSize: "18px", display: "block" }}
+              >
+                <span style={{ display: "inline-block" }}>
+                  <List.Item.Meta avatar={<ShopOutlined />} />
+                </span>
+                <span style={{ display: "inline-block" }}>{i.name}</span>
+              </div>
+            </List.Item>
+          </>
+        ))}
       </List>
     </div>
   );
 
   return (
-    <Row style={{ zIndex: "2", borderBottom: "1px solid black", marginTop: "20px", paddingBottom: "5px", backgroundColor: "white" }} container>
-      <Row item md={2} sm={false} xs={false}></Row>
-      <Row item md={8} sm={12} xs={12}>
-        <Button
-          onClick={() => toggleDrawer(true)}
+    <Row
+      style={{
+        zIndex: "2",
+        marginTop: "20px",
+        backgroundColor: "white",
+      }}
+    >
+      <Row></Row>
+      <Row>
+        <Button onClick={() => toggleDrawer(true)}>Danh mục sản phẩm</Button>
+        <Drawer
+          title="Danh mục sản phẩm"
+          placement="left"
+          visible={openDrawer}
+          width={300}
+          closable={false}
+          onClose={() => toggleDrawer(false)}
         >
-          Danh mục sản phẩm
-        </Button>
-        <Drawer placement="left" visible={openDrawer} onClose={() => toggleDrawer(false)}>
           {list()}
         </Drawer>
       </Row>
-      <Row item md={2} sm={false} xs={false}></Row>
     </Row>
   );
 }
 
-export default MenuBar;
+const mapStateToProps = (state) => ({
+  categoryList: state.category.categoryList,
+});
+
+const mapDispatchToProps = {};
+
+export default withTranslation()(
+  connect(mapStateToProps, mapDispatchToProps)(MenuBar)
+);

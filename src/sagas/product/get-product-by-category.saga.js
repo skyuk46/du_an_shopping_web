@@ -11,8 +11,10 @@ import {
  * @returns {Promise}
  */
 const getProductByCategoryApi = (params) => {
-  const uri = `/product/category/${params}`;
-  return api.get(uri);
+  const id = params.id;
+  delete params.id
+  const uri = `/product/category/${id}`;
+  return api.get(uri, params);
 };
 
 /**
