@@ -23,9 +23,7 @@ function* doCreateCart(action) {
   try {
     const response = yield call(createCartApi, action?.payload);
     if (response?.status) {
-      const { data } = response;
-
-      yield put(createCartSuccess(data));
+      yield put(createCartSuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

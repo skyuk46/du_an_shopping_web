@@ -22,10 +22,8 @@ const createReviewApi = (params) => {
 function* doCreateReview(action) {
   try {
     const response = yield call(createReviewApi, action?.payload);
-    if (response?.data) {
-      const { data } = response;
-
-      yield put(createReviewSuccess(data));
+    if (response?.status) {
+      yield put(createReviewSuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

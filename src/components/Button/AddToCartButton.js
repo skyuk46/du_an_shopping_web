@@ -15,7 +15,7 @@ function AddToCartButton(props) {
   const AddToCart = () => {
     if (!window.localStorage.getItem("token")) setOpenLoginModal(true);
     else {
-      props.getCartDetail(window.localStorage.getItem("token"), () => {
+      props.getCartDetail({ token: window.localStorage.getItem("token") }, () => {
         const { cartDetail } = props;
         const productInCart = cartDetail.find(
           (i) => i.product.id === product.id
@@ -29,7 +29,7 @@ function AddToCartButton(props) {
               total_price: product.price,
             },
             () => {
-              props.getCartDetail(window.localStorage.getItem("token"));
+              props.getCartDetail({ token: window.localStorage.getItem("token") });
             }
           );
         else
@@ -42,7 +42,7 @@ function AddToCartButton(props) {
               total_price: product.price * amount,
             },
             () => {
-              props.getCartDetail(window.localStorage.getItem("token"));
+              props.getCartDetail({ token: window.localStorage.getItem("token") });
             }
           );
       });

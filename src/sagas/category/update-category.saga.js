@@ -22,10 +22,8 @@ const updateCategoryApi = (params) => {
 function* doUpdateCategory(action) {
   try {
     const response = yield call(updateCategoryApi, action?.payload);
-    if (response?.data) {
-      const { data } = response;
-
-      yield put(updateCategorySuccess(data));
+    if (response?.status) {
+      yield put(updateCategorySuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

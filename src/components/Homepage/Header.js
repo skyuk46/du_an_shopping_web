@@ -21,7 +21,7 @@ function Header(props) {
 
   useEffect(function () {
     if (window.localStorage.getItem("token"))
-      props.getCartDetail(window.localStorage.getItem("token"));
+      props.getCartDetail({ token: window.localStorage.getItem("token") });
   }, []);
 
   const logOutMenu = (

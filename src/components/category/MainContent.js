@@ -1,6 +1,5 @@
 import CategoryProductList from "./CategoryProductList";
 import CatergorySortOption from "./CategorySortOption";
-// import CategoryFilterOption from "./CategoryFilterOption";
 import React from "react";
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";

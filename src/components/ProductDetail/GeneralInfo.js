@@ -11,7 +11,7 @@ function GeneralInfo({ product }) {
   };
 
   const contentStyle = {
-    height: "300px",
+    height: "400px",
     color: "#fff",
     lineHeight: "200px",
     textAlign: "center",
@@ -21,7 +21,7 @@ function GeneralInfo({ product }) {
   return (
     <>
       <Row className="product-general-info">
-        <Col span={8}>
+        <Col span={10}>
           <Carousel autoplay infinite={false}>
             {product?.image?.map((img) => (
               <div key={img.link}>
@@ -35,7 +35,7 @@ function GeneralInfo({ product }) {
             ))}
           </Carousel>
         </Col>
-        <Col span={14} offset={1} className="general-detail">
+        <Col span={12} offset={1} className="general-detail">
           <div className="title">{product.name}</div>
           <div className="info-row">
             <Col span={3} className="label">Giá sản phẩm</Col>

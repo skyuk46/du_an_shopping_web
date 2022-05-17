@@ -12,7 +12,6 @@ function EditCategoryTemplate(props) {
   const { categoryList } = props;
   const [editName, setEditName] = useState("");
   const [editDescription, setEditDescription] = useState("");
-  const [isSave, setIsSave] = useState(false);
   const [editingId, setEditingId] = useState(-1);
 
   const Save = () => {
@@ -24,7 +23,7 @@ function EditCategoryTemplate(props) {
     };
     props.updateCategory(request, () => {
       props.searchCategory();
-      setIsSave(true);
+      setEditingId(null)
     });
   };
 
@@ -84,7 +83,6 @@ function EditCategoryTemplate(props) {
           <Button
             onClick={() => {
               setEditingId(id);
-              setIsSave(false);
               setEditName(name);
               setEditDescription(description);
             }}
@@ -106,9 +104,6 @@ function EditCategoryTemplate(props) {
         >
           Lưu
         </Button>
-        <Modal visible={isSave} footer={null}>
-          Đã lưu
-        </Modal>
       </div>
       <Table dataSource={dataSource} columns={columns}>
       </Table>

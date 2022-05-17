@@ -6,6 +6,7 @@ function CategorySortOption(props) {
 
   return (
     <div style={{ width: "100%" }}>
+      Sắp xếp
       <Select style={{ width: "100%" }} onChange={(value) => {
         switch (value) {
           case 'high_to_low_price':

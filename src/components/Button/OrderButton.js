@@ -23,7 +23,7 @@ function OrderButton(props) {
       props.deleteAllCarts(
         { token: window.localStorage.getItem("token") },
         () => {
-          props.getCartDetail(window.localStorage.getItem("token"));
+          props.getCartDetail({ token: window.localStorage.getItem("token") });
         }
       );
     } else {

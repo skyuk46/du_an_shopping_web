@@ -31,6 +31,8 @@ function DetailedInfo(props) {
     }
 
     props.createReview(params, () => {
+      setRate(0)
+      setContent('')
       props.getProductDetail(product.id)
     })
   }

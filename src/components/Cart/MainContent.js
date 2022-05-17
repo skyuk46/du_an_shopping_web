@@ -17,8 +17,8 @@ function MainContent(props) {
 
   useEffect(function () {
     if (window.localStorage.getItem("token"))
-      props.getCartDetail(window.localStorage.getItem("token"));
-  }, [props]);
+      props.getCartDetail({ token: window.localStorage.getItem("token") });
+  }, []);
 
   const DeleteAllCart = () => {
     props.deleteAllCarts(
