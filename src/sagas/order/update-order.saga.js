@@ -22,10 +22,8 @@ const updateOrderApi = (params) => {
 function* doUpdateOrder(action) {
   try {
     const response = yield call(updateOrderApi, action?.payload);
-    if (response?.data) {
-      const { data } = response;
-
-      yield put(updateOrderSuccess(data));
+    if (response?.status) {
+      yield put(updateOrderSuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

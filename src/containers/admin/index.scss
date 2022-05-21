@@ -43,50 +43,6 @@
           }    
       }
       
-      .template-container {
-          width: 90%;
-          padding: 15px;
-          margin-top: 2vw;
-          border: rgba($color: black, $alpha: 0.2) solid 1px;
-          #title {
-              font-size: 24px;
-              button {
-                  float: right;
-              }
-              #isSave {
-                  color: green;
-                  margin-right: 10px;
-                  float: right;
-              }
-          }
-          
-          .MuiInputBase-root {
-              margin: 0.5vw 0;
-          }
-          table ,th,td {
-              text-align: center;
-              padding: 5px;
-              border-collapse: collapse;
-              #description-textfield {
-                  min-width: 120px;
-              }
-          }
-          th, td {
-            text-align: center;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            }
-          th {
-              background-color: lightskyblue;
-          }
-          #add-category-form {
-              button {
-                margin-left: 38%;
-                min-width: 150px;
-              }
-          }
-          
-      }
     .ant-btn-default, .submit_button {
         line-height: 5px;
         border: none;
@@ -112,5 +68,78 @@
       height: 250px;
       overflow-y: auto;
     }  
+  }
+  .admin-container {
+    .menu-content-container {
+      padding: 0 2vw;
+      .template-container {
+        width: 90%;
+        padding: 15px;
+        margin-top: 2vw;
+        border: rgba($color: black, $alpha: 0.2) solid 1px;
+        #title {
+            font-size: 24px;
+            button {
+                float: right;
+            }
+            #isSave {
+                color: green;
+                margin-right: 10px;
+                float: right;
+            }
+        }
+        
+        .MuiInputBase-root {
+            margin: 0.5vw 0;
+        }
+        table ,th,td {
+            text-align: center;
+            padding: 5px;
+            border-collapse: collapse;
+            #description-textfield {
+                min-width: 120px;
+            }
+        }
+        th, td {
+          text-align: center;
+          padding: 10px;
+          border-bottom: 1px solid #ddd;
+          }
+        th {
+            background-color: lightskyblue;
+        }
+        #add-category-form {
+            button {
+              margin-left: 38%;
+              min-width: 150px;
+            }
+        }
+      }
+      .ant-btn-default, .submit_button {
+        line-height: 5px;
+        border: none;
+        border-radius: 12px;
+        background-color: rgb(245, 172, 37);
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 5px #999;
+        &:hover {
+            opacity: 0.75;
+        }
+        &:active {
+            box-shadow: 0 5px #666;
+            transform: translateY(2px);
+        }
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+      }
+      .image-container {
+        width: 200px;
+        height: 250px;
+        overflow-y: auto;
+      }  
+    }
   }
 }

@@ -1,5 +1,4 @@
 import "../../containers/admin/index.scss";
-import Feature from "./Feature";
 import { Row, Col } from "antd";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
@@ -12,15 +11,10 @@ import AddCategoryTemplate from "./AddCategoryTemplate";
 import ViewCategoryTemplate from "./ViewCategoryTemplate";
 import EditCategoryTemplate from "./EditCategoryTemplate";
 import ViewReviewTemplate from "./ViewReviewTemplate";
+import ShopMenu from './Menu'
 
 function MainContent(props) {
   const { categoryList, productList } = props;
-  const featureList = [
-    {
-      featureName: "Quản lý thông tin",
-      tableList: ["Product", "Order", "Category", "Review"],
-    },
-  ];
 
   const [addProductTemplate, setAddProductTemplate] = useState(false);
   const [viewProductTemplate, setViewProductTemplate] = useState(false);
@@ -35,33 +29,28 @@ function MainContent(props) {
   const [viewReviewTemplate, setViewReviewTemplate] = useState(false);
 
   return (
-    <Row id="content-container">
-      <Col span={11}>
-        <div id="title">Chức năng admin</div>
-        {featureList.map((i) => {
-          return (
-            <Feature
-              featureName={i.featureName}
-              tableList={i.tableList}
-              addProductTemplate={addProductTemplate}
-              viewProductTemplate={viewProductTemplate}
-              editProductTemplate={editProductTemplate}
-              addCategoryTemplate={addCategoryTemplate}
-              viewCategoryTemplate={viewCategoryTemplate}
-              editCategoryTemplate={editCategoryTemplate}
-              viewOrderTemplate={viewOrderTemplate}
-              viewReviewTemplate={viewReviewTemplate}
-              setAddProductTemplate={setAddProductTemplate}
-              setViewProductTemplate={setViewProductTemplate}
-              setEditProductTemplate={setEditProductTemplate}
-              setAddCategoryTemplate={setAddCategoryTemplate}
-              setViewCategoryTemplate={setViewCategoryTemplate}
-              setEditCategoryTemplate={setEditCategoryTemplate}
-              setViewOrderTemplate={setViewOrderTemplate}
-              setViewReviewTemplate={setViewReviewTemplate}
-            />
-          );
-        })}
+    <Row className="admin-container">
+      <Col span={6}>
+        <ShopMenu
+          addProductTemplate={addProductTemplate}
+          viewProductTemplate={viewProductTemplate}
+          editProductTemplate={editProductTemplate}
+          addCategoryTemplate={addCategoryTemplate}
+          viewCategoryTemplate={viewCategoryTemplate}
+          editCategoryTemplate={editCategoryTemplate}
+          viewOrderTemplate={viewOrderTemplate}
+          viewReviewTemplate={viewReviewTemplate}
+          setAddProductTemplate={setAddProductTemplate}
+          setViewProductTemplate={setViewProductTemplate}
+          setEditProductTemplate={setEditProductTemplate}
+          setAddCategoryTemplate={setAddCategoryTemplate}
+          setViewCategoryTemplate={setViewCategoryTemplate}
+          setEditCategoryTemplate={setEditCategoryTemplate}
+          setViewOrderTemplate={setViewOrderTemplate}
+          setViewReviewTemplate={setViewReviewTemplate}
+        />
+      </Col>
+      <Col className="menu-content-container" span={18}>
         {addCategoryTemplate && <AddCategoryTemplate />}
         {viewCategoryTemplate && (
           <ViewCategoryTemplate categoryList={categoryList} />
@@ -69,8 +58,6 @@ function MainContent(props) {
         {editCategoryTemplate && (
           <EditCategoryTemplate categoryList={categoryList} />
         )}
-      </Col>
-      <Col span={13}>
         {
           addProductTemplate && <AddProductTemplate />
         }
