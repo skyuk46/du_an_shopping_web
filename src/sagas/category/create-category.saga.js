@@ -22,10 +22,8 @@ const createCategoryApi = (params) => {
 function* doCreateCategory(action) {
   try {
     const response = yield call(createCategoryApi, action?.payload);
-    if (response?.data) {
-      const { data } = response;
-
-      yield put(createCategorySuccess(data));
+    if (response?.status) {
+      yield put(createCategorySuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

@@ -12,7 +12,7 @@
 @mixin overlay {
   position: absolute;
   top: 0;
-  left: -1180px;
+  left: -1200px;
   z-index: 0;
 }
 
@@ -23,10 +23,10 @@
 
   @keyframes move {
     from {
-      left: -1180px;
+      left: -1200px;
     }
     to {
-      left: 450px;
+      left: 188px;
     }
   }
 }
@@ -87,7 +87,7 @@
 #banner-container {
   overflow: hidden;
   position: relative;
-  margin: 0 0.5vw 0 1.5vw;
+  margin: 0 0.5vw 0 0;
   .overlay {
     @include overlay();
   }
@@ -98,7 +98,7 @@
 }
 
 #maincontent-container {
-  padding: 20px;
+  padding: 3vw;
   .category-name {
     font-size: 30px;
     color: rgba($color: red, $alpha: 0.5);

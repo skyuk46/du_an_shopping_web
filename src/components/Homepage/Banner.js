@@ -10,8 +10,8 @@ function Banner({ item, index, moveInIndex, mainIndex }) {
         className={nameOfClass}
         src={item.banner}
         alt="banner"
-        width="1000px"
-        height="400px"
+        width="1200px"
+        height="450px"
       />
     </center>
   );

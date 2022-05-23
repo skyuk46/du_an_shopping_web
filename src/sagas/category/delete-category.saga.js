@@ -23,9 +23,7 @@ function* doDeleteCategory(action) {
   try {
     const response = yield call(deleteCategoryApi, action?.payload);
     if (response?.status) {
-      const { data } = response;
-
-      yield put(deleteCategorySuccess(data));
+      yield put(deleteCategorySuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

@@ -28,6 +28,7 @@ function AddCategoryTemplate(props) {
     };
     props.createCategory(request, () => {
       setOpenDialog(true)
+      form.resetFields()
     });
   };
 
@@ -42,7 +43,7 @@ function AddCategoryTemplate(props) {
               marginBottom: "10px",
             }}
           >
-            Loại hàng hóa đã được thêm
+            Danh mục đã được thêm
           </div>
         ) : (
           <div>

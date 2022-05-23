@@ -25,9 +25,7 @@ function* doDeleteCart(action) {
   try {
     const response = yield call(deleteCartApi, action?.payload);
     if (response?.status) {
-      const { data } = response;
-
-      yield put(deleteCartSuccess(data));
+      yield put(deleteCartSuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

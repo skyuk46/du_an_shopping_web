@@ -14,7 +14,7 @@ function ViewCategoryTemplate(props) {
     props.deleteCategory(
       { id, token: window.localStorage.getItem("token") },
       () => {
-        searchCategory();
+        props.searchCategory();
         setOpenDialog(false);
       }
     );
@@ -67,10 +67,10 @@ function ViewCategoryTemplate(props) {
           >
             Xóa
           </Button>
-        )
-      }
-    }
-  ]
+        );
+      },
+    },
+  ];
 
   return (
     <>
@@ -86,8 +86,7 @@ function ViewCategoryTemplate(props) {
       </Modal>
       <div class="template-container">
         <div id="title">Danh sách loại sản phẩm</div>
-        <Table dataSource={dataSource} columns={columns}>
-        </Table>
+        <Table dataSource={dataSource} columns={columns}></Table>
       </div>
     </>
   );

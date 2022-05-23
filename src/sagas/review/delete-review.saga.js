@@ -23,9 +23,7 @@ function* doDeleteReview(action) {
   try {
     const response = yield call(deleteReviewApi, action?.payload);
     if (response?.status) {
-      const { data } = response;
-
-      yield put(deleteReviewSuccess(data));
+      yield put(deleteReviewSuccess());
 
       // Call callback action if provided
       if (action.onSuccess) {

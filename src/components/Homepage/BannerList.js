@@ -6,6 +6,8 @@ import banner4 from "../../assets/images/banner4.jpg";
 import banner5 from "../../assets/images/banner5.jpg";
 import { useEffect, useState } from "react";
 import Banner from "./Banner";
+import { Row, Col } from "antd";
+import MenuBar from "./MenuBar";
 
 var mainIndex = 0;
 
@@ -44,19 +46,29 @@ function BannerList() {
   });
 
   return (
-    <div id="banner-container">
-      {bannerList.map((item, index) => {
-        return (
-          <Banner
-            key={index}
-            item={item}
-            index={index}
-            mainIndex={mainIndex}
-            moveInIndex={moveInIndex}
-          />
-        );
-      })}
-    </div>
+    <>
+      <br />
+      <Row>
+        <Col span={4}>
+          <MenuBar />
+        </Col>
+        <Col span={20}>
+          <div id="banner-container">
+            {bannerList.map((item, index) => {
+              return (
+                <Banner
+                  key={index}
+                  item={item}
+                  index={index}
+                  mainIndex={mainIndex}
+                  moveInIndex={moveInIndex}
+                />
+              );
+            })}
+          </div>
+        </Col>
+      </Row>
+    </>
   );
 }
 

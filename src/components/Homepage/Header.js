@@ -12,7 +12,6 @@ import { logout } from "../../stores/auth/auth.action";
 import { redirectRouter } from "../../utils/router";
 import { getCartDetail } from "../../stores/cart/cart.action";
 import { searchProductsByName } from "../../stores/product/product.action";
-import MenuBar from "./MenuBar";
 import { Row, Col, Menu, Input, Dropdown, Badge } from "antd";
 
 function Header(props) {
@@ -166,7 +165,6 @@ function Header(props) {
           </Col>
         </Row>
       </div>
-      <MenuBar />
     </>
   );
 }
