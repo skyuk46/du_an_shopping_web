@@ -20,3 +20,8 @@ code {
 .ant-list-item:hover {
   cursor: pointer;
 }
+
+.ant-menu.ant-menu-root, .ant-menu-item {
+  background-color: #87cefa;
+  margin: 2px 0 !important;
+}

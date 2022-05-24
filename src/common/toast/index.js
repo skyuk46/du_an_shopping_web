@@ -19,7 +19,7 @@ const addNotification = (
 ) => {
   store.addNotification({
     title: i18n.t(title),
-    message: i18n.t(message),
+    message,
     type: type,
     insert: 'bottom',
     container: 'top-right',

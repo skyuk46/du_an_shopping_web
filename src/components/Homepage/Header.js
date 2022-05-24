@@ -75,7 +75,7 @@ function Header(props) {
               <img id="logo" src={logo} alt="logo" />
             </Link>
           </Col>
-          <Col span={8} style={{ display: "table" }}>
+          <Col span={8} offset={4} style={{ display: "table" }}>
             <div id="search-bar">
               <Input
                 placeholder={t("common.searchPlaceholder")}
@@ -119,7 +119,7 @@ function Header(props) {
               </div>
             </div>
           </Col>
-          <Col span={4} offset={8} id="icon-container">
+          <Col span={4} offset={4} id="icon-container">
             {iconList.map((i) => {
               return (
                 <>

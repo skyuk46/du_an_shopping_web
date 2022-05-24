@@ -5,6 +5,7 @@ import category from './category/category.reducer';
 import product from './product/product.reducer';
 import order from './order/order.reducer'
 import review from './review/review.reducer';
+import user from './user/user.reducer';
 
 const rootReducer = combineReducers({
   auth,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   category,
   product,
   order,
-  review
+  review,
+  user
 });
 
 export default rootReducer;

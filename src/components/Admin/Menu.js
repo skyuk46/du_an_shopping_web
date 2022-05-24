@@ -2,28 +2,23 @@ import "../../containers/admin/index.scss";
 import { Menu } from "antd";
 import { searchCategory } from "../../stores/category/category.action";
 import { searchProduct } from "../../stores/product/product.action";
+import { searchUser } from "../../stores/user/user.action";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 
 function ShopMenu(props) {
   const {
-    addProductTemplate,
-    viewProductTemplate,
-    editProductTemplate,
     setAddProductTemplate,
     setViewProductTemplate,
     setEditProductTemplate,
-    addCategoryTemplate,
-    viewCategoryTemplate,
-    editCategoryTemplate,
     setAddCategoryTemplate,
     setViewCategoryTemplate,
     setEditCategoryTemplate,
-    viewOrderTemplate,
     setViewOrderTemplate,
-    viewReviewTemplate,
     setViewReviewTemplate,
+    setViewUserTemplate,
+    setEditUserTemplate,
   } = props;
 
   const [key, setKey] = useState("ViewProduct");
@@ -45,6 +40,8 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(false);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
     } else if (key === "AddCategory") {
       setAddProductTemplate(false);
       setEditProductTemplate(false);
@@ -54,6 +51,8 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(false);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
     } else if (key === "ViewProduct") {
       setAddProductTemplate(false);
       setEditProductTemplate(false);
@@ -63,6 +62,8 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(false);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
       props.searchProduct();
     } else if (key === "ViewOrder") {
       setAddProductTemplate(false);
@@ -73,6 +74,20 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(true);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
+    } else if (key === "ViewUser") {
+      setAddProductTemplate(false);
+      setEditProductTemplate(false);
+      setViewProductTemplate(false);
+      setAddCategoryTemplate(false);
+      setEditCategoryTemplate(false);
+      setViewCategoryTemplate(false);
+      setViewOrderTemplate(false);
+      setViewReviewTemplate(false);
+      setViewUserTemplate(true);
+      setEditUserTemplate(false);
+      props.searchUser({ token: window.localStorage.getItem("token") });
     } else if (key === "ViewCategory") {
       setAddProductTemplate(false);
       setEditProductTemplate(false);
@@ -82,6 +97,8 @@ function ShopMenu(props) {
       setViewCategoryTemplate(true);
       setViewOrderTemplate(false);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
       props.searchCategory();
     } else if (key === "ViewReview") {
       setAddProductTemplate(false);
@@ -92,6 +109,8 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(false);
       setViewReviewTemplate(true);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
     } else if (key === "EditProduct") {
       setAddProductTemplate(false);
       setEditProductTemplate(true);
@@ -101,6 +120,8 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(false);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
       props.searchProduct();
     } else if (key === "EditCategory") {
       setAddProductTemplate(false);
@@ -111,7 +132,21 @@ function ShopMenu(props) {
       setViewCategoryTemplate(false);
       setViewOrderTemplate(false);
       setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(false);
       props.searchCategory();
+    } else if (key === "EditUser") {
+      setAddProductTemplate(false);
+      setEditProductTemplate(false);
+      setViewProductTemplate(false);
+      setAddCategoryTemplate(false);
+      setEditCategoryTemplate(false);
+      setViewCategoryTemplate(false);
+      setViewOrderTemplate(false);
+      setViewReviewTemplate(false);
+      setViewUserTemplate(false);
+      setEditUserTemplate(true);
+      props.searchUser({ token: window.localStorage.getItem("token") });
     }
   };
 
@@ -204,6 +239,28 @@ function ShopMenu(props) {
       label: "Bình luận",
       type: "",
     },
+    {
+      key: "User",
+      icon: null,
+      children: [
+        {
+          key: "ViewUser",
+          icon: null,
+          children: null,
+          label: "Xem người dùng",
+          type: "",
+        },
+        {
+          key: "EditUser",
+          icon: null,
+          children: null,
+          label: "Sửa người dùng",
+          type: "",
+        },
+      ],
+      label: "Người dùng",
+      type: "",
+    },
   ];
 
   const onClick = (e) => {
@@ -222,7 +279,7 @@ function ShopMenu(props) {
           width: 256,
         }}
         defaultSelectedKeys={["ViewProduct"]}
-        defaultOpenKeys={["ViewProduct"]}
+        defaultOpenKeys={["Product", "Category", "Order", "Review", "User"]}
         mode="inline"
         items={items}
       />
@@ -235,6 +292,7 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = {
   searchCategory,
   searchProduct,
+  searchUser,
 };
 
 export default withTranslation()(

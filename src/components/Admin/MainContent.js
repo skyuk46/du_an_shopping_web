@@ -11,10 +11,12 @@ import AddCategoryTemplate from "./AddCategoryTemplate";
 import ViewCategoryTemplate from "./ViewCategoryTemplate";
 import EditCategoryTemplate from "./EditCategoryTemplate";
 import ViewReviewTemplate from "./ViewReviewTemplate";
+import ViewUserTemplate from "./ViewUserTemplate";
+import EditUserTemplate from "./EditUserTemplate";
 import ShopMenu from './Menu'
 
 function MainContent(props) {
-  const { categoryList, productList } = props;
+  const { categoryList, productList, userList } = props;
 
   const [addProductTemplate, setAddProductTemplate] = useState(false);
   const [viewProductTemplate, setViewProductTemplate] = useState(false);
@@ -28,18 +30,13 @@ function MainContent(props) {
 
   const [viewReviewTemplate, setViewReviewTemplate] = useState(false);
 
+  const [viewUserTemplate, setViewUserTemplate] = useState(false)
+  const [editUserTemplate, setEditUserTemplate] = useState(false)
+
   return (
     <Row className="admin-container">
-      <Col span={6}>
+      <Col span={3}>
         <ShopMenu
-          addProductTemplate={addProductTemplate}
-          viewProductTemplate={viewProductTemplate}
-          editProductTemplate={editProductTemplate}
-          addCategoryTemplate={addCategoryTemplate}
-          viewCategoryTemplate={viewCategoryTemplate}
-          editCategoryTemplate={editCategoryTemplate}
-          viewOrderTemplate={viewOrderTemplate}
-          viewReviewTemplate={viewReviewTemplate}
           setAddProductTemplate={setAddProductTemplate}
           setViewProductTemplate={setViewProductTemplate}
           setEditProductTemplate={setEditProductTemplate}
@@ -48,9 +45,11 @@ function MainContent(props) {
           setEditCategoryTemplate={setEditCategoryTemplate}
           setViewOrderTemplate={setViewOrderTemplate}
           setViewReviewTemplate={setViewReviewTemplate}
+          setViewUserTemplate={setViewUserTemplate}
+          setEditUserTemplate={setEditUserTemplate}
         />
       </Col>
-      <Col className="menu-content-container" span={18}>
+      <Col className="menu-content-container" span={21}>
         {addCategoryTemplate && <AddCategoryTemplate />}
         {viewCategoryTemplate && (
           <ViewCategoryTemplate categoryList={categoryList} />
@@ -73,6 +72,12 @@ function MainContent(props) {
         {
           viewReviewTemplate && <ViewReviewTemplate />
         }
+        {
+          viewUserTemplate && <ViewUserTemplate userList={userList} />
+        }
+        {
+          editUserTemplate && <EditUserTemplate userList={userList} />
+        }
       </Col>
     </Row>
   );
@@ -80,7 +85,8 @@ function MainContent(props) {
 
 const mapStateToProps = (state) => ({
   categoryList: state.category.categoryList,
-  productList: state.product.productList
+  productList: state.product.productList,
+  userList: state.user.userList
 });
 
 const mapDispatchToProps = {};
