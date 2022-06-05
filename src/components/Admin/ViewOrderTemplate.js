@@ -70,7 +70,7 @@ function ViewOrderTemplate(props) {
         return (
           <>
             {
-              status === 'pending' && (<Button
+              status === 'Chờ thanh toán' && (<Button
                 onClick={() => {
                   setConfirmId(id);
                 }}
